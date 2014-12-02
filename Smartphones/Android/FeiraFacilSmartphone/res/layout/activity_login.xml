@@ -21,7 +21,7 @@
         android:visibility="gone" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/imgProdPromo"
         android:layout_width="match_parent"
         android:layout_height="268dp"
         android:src="@drawable/logo_telainicial" />
