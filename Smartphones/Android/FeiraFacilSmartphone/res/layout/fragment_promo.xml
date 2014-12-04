@@ -12,19 +12,9 @@
         android:id="@+id/list_prod_promo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/seleciorSup"
         android:layout_alignLeft="@+id/section_label"
         android:layout_alignTop="@+id/section_label" >
 
     </ListView>
-
-    <Button
-        android:id="@+id/seleciorSup"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/button_promo" />
 
 </RelativeLayout>

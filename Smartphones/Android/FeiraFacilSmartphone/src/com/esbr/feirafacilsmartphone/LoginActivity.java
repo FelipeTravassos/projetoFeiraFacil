@@ -66,7 +66,7 @@ public class LoginActivity extends Activity {
 
         boolean cancel = false;
         View focusView = null;
-
+/*
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
@@ -88,7 +88,7 @@ public class LoginActivity extends Activity {
             focusView = mPasswordView;
             cancel = true;
         }
-
+*/
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -143,8 +143,8 @@ public class LoginActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.login, menu);
-        return true;
+        //getMenuInflater().inflate(R.menu.login, menu);
+        return false;
     }
 
     @Override

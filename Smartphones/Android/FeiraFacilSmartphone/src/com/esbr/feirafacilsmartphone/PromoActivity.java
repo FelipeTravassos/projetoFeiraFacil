@@ -23,6 +23,7 @@ import android.text.Layout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 public class PromoActivity extends Activity implements ActionBar.TabListener {
@@ -96,6 +98,21 @@ public class PromoActivity extends Activity implements ActionBar.TabListener {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.promo, menu);
+		//super.onCreateOptionsMenu(menu);
+		 
+        //Carrega o arquivo de menu. 
+		//MenuInflater inflater = getMenuInflater();
+		//inflater.inflate(R.menu.select_supermercado, menu);
+		
+		//Pega o Componente.  
+		Button mSearchView = (Button) menu.findItem(R.id.selectsuper)
+		       .getActionView();
+		//Define um texto de ajuda:
+		//        mSearchView.setQueryHint("teste");
+		
+		// exemplos de utilização:
+		//mSearchView.setOnQueryTextListener(this);
+		
 		return true;
 	}
 
@@ -215,18 +232,6 @@ public class PromoActivity extends Activity implements ActionBar.TabListener {
 			values[9] = (new Produto("Produto 0","Descrição do produto j", 2.38));
 			
 			lv.setAdapter(new PromoArrayAdapter(getActivity(), values)); 
-			
-			Button selecionarSup = (Button) rootView.findViewById(R.id.seleciorSup);
-			selecionarSup.setOnClickListener(new OnClickListener() {
-	            @Override
-	            public void onClick(View view) {
-	            	/*
-	            	Intent myIntent = new Intent(getBaseContext(), PromoActivity.class);
-	            	startActivity(myIntent);
-	            	*/
-	            }
-	            
-	        });
 			
 			return rootView;
 		}

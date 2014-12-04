@@ -24,7 +24,7 @@
         </activity>
         <activity
             android:name=".PromoActivity"
-            android:label="@string/title_activity_promo" android:screenOrientation="portrait">
+            android:label="@string/title_activity_promo" android:screenOrientation="unspecified">
         </activity>
     </application>
 
