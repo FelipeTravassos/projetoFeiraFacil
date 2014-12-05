@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"  >
     
-    
-    <!-- Refresh -->
+    <!-- Selecionar supermercado -->
     <item android:id="@+id/selectsuper"
           android:icon="@drawable/icone_finalizarfeira"
           android:title="@string/hello_world" 
           android:showAsAction="ifRoom" />
     
+    <!-- Painel do usuario -->
+    <item
+        android:id="@+id/ajuda"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/ajuda"/>
+    
+    <!-- Painel do usuario -->
+    <item
+        android:id="@+id/painel_usuario"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/painel_user"/>
+    
+    <!-- Configuracoes -->
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_settings"/>
+    
+    <!-- Sobre -->
+    <item
+        android:id="@+id/sobre"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/sobre"/>
 
 </menu>

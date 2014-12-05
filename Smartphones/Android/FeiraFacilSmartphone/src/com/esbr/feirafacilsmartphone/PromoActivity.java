@@ -34,6 +34,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PromoActivity extends Activity implements ActionBar.TabListener {
 
@@ -98,20 +99,6 @@ public class PromoActivity extends Activity implements ActionBar.TabListener {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.promo, menu);
-		//super.onCreateOptionsMenu(menu);
-		 
-        //Carrega o arquivo de menu. 
-		//MenuInflater inflater = getMenuInflater();
-		//inflater.inflate(R.menu.select_supermercado, menu);
-		
-		//Pega o Componente.  
-		Button mSearchView = (Button) menu.findItem(R.id.selectsuper)
-		       .getActionView();
-		//Define um texto de ajuda:
-		//        mSearchView.setQueryHint("teste");
-		
-		// exemplos de utilização:
-		//mSearchView.setOnQueryTextListener(this);
 		
 		return true;
 	}
@@ -122,10 +109,31 @@ public class PromoActivity extends Activity implements ActionBar.TabListener {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		
+		if (id == R.id.selectsuper) {
+			Toast toast = Toast.makeText(getApplicationContext(), "Seleciona supermercado", Toast.LENGTH_LONG);
+			toast.show();
+			return true;
+		}else if (id == R.id.ajuda) {
+			Toast toast = Toast.makeText(getApplicationContext(), "Ajuda", Toast.LENGTH_LONG);
+			toast.show();
+			return true;
+		}else if (id == R.id.painel_usuario) {
+			Toast toast = Toast.makeText(getApplicationContext(), "Painel usuário", Toast.LENGTH_LONG);
+			toast.show();
+			return true;
+		}else if (id == R.id.sobre) {
+			Toast toast = Toast.makeText(getApplicationContext(), "Sobre", Toast.LENGTH_LONG);
+			toast.show();
+			return true;
+		}else if (id == R.id.action_settings) {
+			Toast toast = Toast.makeText(getApplicationContext(), "Configurações", Toast.LENGTH_LONG);
+			toast.show();
 			return true;
 		}else if(id == android.R.id.home){
-			NavUtils.navigateUpFromSameTask(this);
+			try{
+				NavUtils.navigateUpFromSameTask(this);
+			}catch(Exception e){	}
 	        return true;
 		}
 		return super.onOptionsItemSelected(item);
