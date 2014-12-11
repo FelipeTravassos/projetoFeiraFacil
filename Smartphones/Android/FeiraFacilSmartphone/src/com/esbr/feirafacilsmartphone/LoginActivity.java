@@ -1,6 +1,7 @@
 package com.esbr.feirafacilsmartphone;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentResolver;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
@@ -63,8 +65,24 @@ public class LoginActivity extends Activity {
     }
 
     private void attemptLoginWithFacebook() {
-		// TODO Auto-generated method stub
-		
+    	AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Deseja fazer login com o facebook?");
+        builder1.setCancelable(true);
+        builder1.setPositiveButton("Sim",
+                new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        builder1.setNegativeButton("Não",
+                new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
 	}
     
     public void attemptLogin() {
