@@ -55,14 +55,32 @@
             android:maxLines="1"
             android:singleLine="true" />
 
-        <Button
-            android:id="@+id/email_sign_in_button"
-            style="?android:textAppearanceSmall"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/action_sign_in"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/email_sign_in_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="148dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="0.56"
+                android:background="@drawable/botaoentrar_telainicial"
+                android:text="@string/action_sign_in"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/vincular_facebook"
+                style="?android:textAppearanceSmall"
+                android:layout_width="74dp"
+                android:layout_height="56dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/facebook_icon"
+                android:textStyle="bold" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

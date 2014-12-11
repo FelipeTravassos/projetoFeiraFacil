@@ -12,5 +12,6 @@
     <string name="painel_user">Usuário</string>
     <string name="sobre">Sobre</string>
     <string name="ajuda">Ajuda</string>
+    <string name="title_activity_supermercado">Supermercado</string>
 
 </resources>

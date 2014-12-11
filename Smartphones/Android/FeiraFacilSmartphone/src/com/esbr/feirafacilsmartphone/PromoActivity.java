@@ -111,6 +111,8 @@ public class PromoActivity extends Activity implements ActionBar.TabListener {
 		int id = item.getItemId();
 		
 		if (id == R.id.selectsuper) {
+        	Intent myIntent = new Intent(getBaseContext(), SupermercadoActivity.class);
+        	startActivity(myIntent);
 			Toast toast = Toast.makeText(getApplicationContext(), "Seleciona supermercado", Toast.LENGTH_LONG);
 			toast.show();
 			return true;

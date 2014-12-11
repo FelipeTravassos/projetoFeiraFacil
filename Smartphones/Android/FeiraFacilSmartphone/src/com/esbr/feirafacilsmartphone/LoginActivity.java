@@ -53,8 +53,20 @@ public class LoginActivity extends Activity {
                 attemptLogin();
             }
         });
+        Button loginWithFacebook = (Button) findViewById(R.id.vincular_facebook);
+        loginWithFacebook.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptLoginWithFacebook();
+            }
+        });
     }
 
+    private void attemptLoginWithFacebook() {
+		// TODO Auto-generated method stub
+		
+	}
+    
     public void attemptLogin() {
         // Reset errors.
         mEmailView.setError(null);
@@ -142,8 +154,8 @@ public class LoginActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.login, menu);
+        //Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.login, menu);
         return false;
     }
 

@@ -1,0 +1,20 @@
+<resources>
+
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+    <string name="pref_title_sempre_solicitar_senha">Sempre solicitar senha</string>
+    <string name="pref_description_pedir_senha_sempre">O aplicativo sempre vai solicitar a senha ao entrar</string>
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notificações</string>
+    <string name="pref_title_aviso_feira_pronta">Aviso sobre feira pronta</string>
+
+</resources>
