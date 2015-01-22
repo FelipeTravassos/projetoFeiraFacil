@@ -2,7 +2,9 @@ package com.esbr.feirafacilsmartphone;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +25,7 @@ import android.os.AsyncTask;
 
 import android.os.Build;
 import android.provider.ContactsContract;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View.OnClickListener;
@@ -32,6 +35,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
@@ -55,13 +59,13 @@ public class LoginActivity extends Activity {
                 attemptLogin();
             }
         });
-        Button loginWithFacebook = (Button) findViewById(R.id.vincular_facebook);
+       /*Button loginWithFacebook = (Button) findViewById(R.id.vincular_facebook);
         loginWithFacebook.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLoginWithFacebook();
             }
-        });
+        });*/
     }
 
     private void attemptLoginWithFacebook() {
@@ -96,7 +100,7 @@ public class LoginActivity extends Activity {
 
         boolean cancel = false;
         View focusView = null;
-/*
+
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
@@ -118,7 +122,7 @@ public class LoginActivity extends Activity {
             focusView = mPasswordView;
             cancel = true;
         }
-*/
+
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -126,7 +130,7 @@ public class LoginActivity extends Activity {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            //showProgress(true);
+            // showProgress(true);
         	Intent myIntent = new Intent(getBaseContext(), PromoActivity.class);
         	startActivity(myIntent);
         	finish();
@@ -174,18 +178,75 @@ public class LoginActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         //Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.login, menu);
-        return false;
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.criar_conta) {
+        	popUpCriarConta();
+        	Toast toast = Toast.makeText(getApplicationContext(), "Criar conta", Toast.LENGTH_LONG);
+			toast.show();
             return true;
-        }
+        }else if (id == R.id.esqueci_senha) {
+        	popUpEsqueciSenha();
+            return true;
+        }else if (id == R.id.login_com_face) {
+        	Toast toast = Toast.makeText(getApplicationContext(), "Login com facebook", Toast.LENGTH_LONG);
+			toast.show();
+            return true;
+        }else if (id == R.id.login_com_google) {
+        	Toast toast = Toast.makeText(getApplicationContext(), "Login com google", Toast.LENGTH_LONG);
+			toast.show();
+            return true;
+        }else
         return super.onOptionsItemSelected(item);
+    }
+    
+    private void popUpCriarConta(){
+    	AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
+    	alertDialog.setTitle(R.string.criar_conta);
+
+    	LayoutInflater inflater = this.getLayoutInflater();
+    	alertDialog.setView(inflater.inflate(R.layout.criar_conta, null));
+    			
+        alertDialog.setPositiveButton(R.string.salvar,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+                    }
+                });
+        alertDialog.setNegativeButton(R.string.voltar,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to execute after dialog
+                        dialog.cancel();
+                    }
+                });
+        alertDialog.show();
+    }
+    
+    /**
+     * Create popup if clicked 'I forgot my password'
+     */
+    private void popUpEsqueciSenha(){
+    	AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
+    	alertDialog.setTitle(R.string.esqueci_senha);
+        alertDialog.setMessage(R.string.digite_seu_email);
+        EditText input = new EditText(this);
+        alertDialog.setView(input);
+        alertDialog.setPositiveButton(R.string.recuperar,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+                    }
+                });
+        alertDialog.setNegativeButton(R.string.voltar,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to execute after dialog
+                        dialog.cancel();
+                    }
+                });
+        alertDialog.show();
     }
 }

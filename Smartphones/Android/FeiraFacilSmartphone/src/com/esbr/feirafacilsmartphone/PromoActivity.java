@@ -46,6 +46,7 @@ public class PromoActivity extends Activity implements ActionBar.TabListener {
 	 * {@link android.support.v13.app.FragmentStatePagerAdapter}.
 	 */
 	SectionsPagerAdapter mSectionsPagerAdapter;
+	int selected;
 
 	/**
 	 * The {@link ViewPager} that will host the section contents.
@@ -59,21 +60,14 @@ public class PromoActivity extends Activity implements ActionBar.TabListener {
 
 	    getActionBar().setDisplayHomeAsUpEnabled(true);
 	    
-		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		// Create the adapter that will return a fragment for each of the three
-		// primary sections of the activity.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
-		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 
-		// When swiping between different sections, select the corresponding
-		// tab. We can also use ActionBar.Tab#select() to do this if we have
-		// a reference to the Tab.
 		mViewPager
 				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 					@Override
@@ -82,12 +76,7 @@ public class PromoActivity extends Activity implements ActionBar.TabListener {
 					}
 				});
 
-		// For each of the sections in the app, add a tab to the action bar.
 		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-			// Create a tab with text corresponding to the page title defined by
-			// the adapter. Also specify this Activity object, which implements
-			// the TabListener interface, as the callback (listener) for when
-			// this tab is selected.
 			actionBar.addTab(actionBar.newTab()
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
@@ -97,25 +86,33 @@ public class PromoActivity extends Activity implements ActionBar.TabListener {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.promo, menu);
-		
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		
 		if (id == R.id.selectsuper) {
-        	Intent myIntent = new Intent(getBaseContext(), SupermercadoActivity.class);
-        	startActivity(myIntent);
-			Toast toast = Toast.makeText(getApplicationContext(), "Seleciona supermercado", Toast.LENGTH_LONG);
-			toast.show();
-			return true;
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle(R.string.selecionar_supermercado);
+	        builder.setMessage(getNomeSupermercado())
+	               .setPositiveButton(R.string.selecionar, new DialogInterface.OnClickListener() {
+	                   public void onClick(DialogInterface dialog, int id) {
+	                	   Intent myIntent = new Intent(getBaseContext(), SupermercadoActivity.class);
+		                   myIntent.putExtra("SUPERMERCADO", getNomeSupermercado());
+		                   startActivity(myIntent);
+	                   }
+	               })
+	               .setNegativeButton(R.string.voltar, new DialogInterface.OnClickListener() {
+	                   public void onClick(DialogInterface dialog, int id) {
+	                       // User cancelled the dialog
+	                   }
+	               });
+	        AlertDialog dialog = builder.create();
+	        dialog.show();
+	        return true;
 		}else if (id == R.id.ajuda) {
 			Toast toast = Toast.makeText(getApplicationContext(), "Ajuda", Toast.LENGTH_LONG);
 			toast.show();
@@ -141,11 +138,25 @@ public class PromoActivity extends Activity implements ActionBar.TabListener {
 		return super.onOptionsItemSelected(item);
 	}
 
+	private String getNomeSupermercado() {
+		Locale l = Locale.getDefault();
+		switch (selected) {
+		case 0:	
+			return getString(R.string.title_section1).toUpperCase(l);
+		case 1:
+			return getString(R.string.title_section2).toUpperCase(l);
+		case 2:
+			return getString(R.string.title_section3).toUpperCase(l);
+		}
+		return null;
+	}
+	
 	@Override
 	public void onTabSelected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
 		// When the given tab is selected, switch to the corresponding page in
 		// the ViewPager.
+		selected = tab.getPosition();
 		mViewPager.setCurrentItem(tab.getPosition());
 	}
 
@@ -171,9 +182,6 @@ public class PromoActivity extends Activity implements ActionBar.TabListener {
 
 		@Override
 		public Fragment getItem(int position) {
-			// getItem is called to instantiate the fragment for the given page.
-			// Return a PlaceholderFragment (defined as a static inner class
-			// below).
 			return PlaceholderFragment.newInstance(position + 1);
 		}
 
@@ -186,7 +194,7 @@ public class PromoActivity extends Activity implements ActionBar.TabListener {
 		public CharSequence getPageTitle(int position) {
 			Locale l = Locale.getDefault();
 			switch (position) {
-			case 0:
+			case 0:	
 				return getString(R.string.title_section1).toUpperCase(l);
 			case 1:
 				return getString(R.string.title_section2).toUpperCase(l);

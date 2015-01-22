@@ -13,4 +13,7 @@
     <string name="error_field_required">Este campo é obrigatório</string>
     <string name="criar_conta">Novo usuário</string>
     <string name="esqueci_senha">Esqueci minha senha</string>
+    <string name="digite_seu_email">Digite seu email.</string>
+    <string name="recuperar">recuperar</string>
+    <string name="login_google">Login com google</string>
 </resources>

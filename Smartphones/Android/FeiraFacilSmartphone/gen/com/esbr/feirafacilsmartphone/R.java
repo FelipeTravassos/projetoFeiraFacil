@@ -46,42 +46,57 @@ public final class R {
         public static final int tag_produtosemdivisoria=0x7f020015;
     }
     public static final class id {
-        public static final int action_settings=0x7f090018;
-        public static final int ajuda=0x7f090016;
-        public static final int criar_conta=0x7f090013;
-        public static final int descProdPromo=0x7f09000f;
+        public static final int action_settings=0x7f090025;
+        public static final int ajuda=0x7f090023;
+        public static final int criarContaCPF=0x7f09000e;
+        public static final int criarContaConfirmeSenha=0x7f090012;
+        public static final int criarContaEmail=0x7f09000c;
+        public static final int criarContaNome=0x7f09000a;
+        public static final int criarContaSenha=0x7f090010;
+        public static final int criar_conta=0x7f09001e;
+        public static final int descProdPromo=0x7f09001a;
         public static final int email=0x7f090003;
         public static final int email_login_form=0x7f090002;
         public static final int email_sign_in_button=0x7f090006;
-        public static final int esqueci_senha=0x7f090014;
+        public static final int esqueci_senha=0x7f09001f;
         public static final int imgProdPromo=0x7f090001;
-        public static final int imgProduto=0x7f090011;
-        public static final int imgSupermercado=0x7f090012;
-        public static final int listSupermercados=0x7f090009;
-        public static final int list_prod_promo=0x7f09000a;
-        public static final int lista_prod_super=0x7f09000c;
+        public static final int imgProduto=0x7f09001c;
+        public static final int imgSupermercado=0x7f09001d;
+        public static final int listSupermercados=0x7f090008;
+        public static final int list_prod_promo=0x7f090013;
+        public static final int lista_prod_super=0x7f090015;
         public static final int login=0x7f090005;
+        public static final int login_com_face=0x7f090020;
+        public static final int login_com_google=0x7f090021;
         public static final int login_progress=0x7f090000;
-        public static final int nomeProdPromo=0x7f09000d;
-        public static final int nomeSupermercado=0x7f090010;
-        public static final int pager=0x7f090008;
-        public static final int painel_usuario=0x7f090017;
+        public static final int nomeDaLista=0x7f090017;
+        public static final int nomeProdPromo=0x7f090018;
+        public static final int nomeSupermercado=0x7f09001b;
+        public static final int pager=0x7f090007;
+        public static final int painel_usuario=0x7f090024;
         public static final int password=0x7f090004;
-        public static final int precoProdPromo=0x7f09000e;
-        public static final int section_label=0x7f09000b;
-        public static final int selectsuper=0x7f090015;
-        public static final int sobre=0x7f090019;
-        public static final int vincular_facebook=0x7f090007;
+        public static final int precoProdPromo=0x7f090019;
+        public static final int quantidadeItems=0x7f090016;
+        public static final int section_label=0x7f090014;
+        public static final int selectsuper=0x7f090022;
+        public static final int sobre=0x7f090026;
+        public static final int textView1=0x7f090009;
+        public static final int textView2=0x7f09000b;
+        public static final int textView3=0x7f09000d;
+        public static final int textView4=0x7f09000f;
+        public static final int textView5=0x7f090011;
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;
         public static final int activity_promo=0x7f030001;
         public static final int activity_select_supermarket=0x7f030002;
         public static final int activity_supermercado=0x7f030003;
-        public static final int fragment_promo=0x7f030004;
-        public static final int fragment_supermercado=0x7f030005;
-        public static final int prod_promo=0x7f030006;
-        public static final int supermercado=0x7f030007;
+        public static final int criar_conta=0x7f030004;
+        public static final int fragment_promo=0x7f030005;
+        public static final int fragment_supermercado=0x7f030006;
+        public static final int lista_de_compra=0x7f030007;
+        public static final int prod_promo=0x7f030008;
+        public static final int supermercado=0x7f030009;
     }
     public static final class menu {
         public static final int login=0x7f080000;
@@ -92,48 +107,62 @@ public final class R {
     }
     public static final class string {
         public static final int action_settings=0x7f060002;
-        public static final int action_sign_in=0x7f06000e;
-        public static final int action_sign_in_short=0x7f06000f;
+        public static final int action_sign_in=0x7f060018;
+        public static final int action_sign_in_short=0x7f060019;
         public static final int ajuda=0x7f06000a;
         public static final int app_name=0x7f060000;
-        public static final int criar_conta=0x7f060016;
+        public static final int confirme_senha=0x7f060012;
+        public static final int cpf=0x7f060010;
+        public static final int criar_conta=0x7f060020;
         public static final int deseja_realmente_sair=0x7f060007;
-        public static final int error_field_required=0x7f060015;
-        public static final int error_incorrect_password=0x7f060014;
-        public static final int error_invalid_email=0x7f060012;
-        public static final int error_invalid_password=0x7f060013;
-        public static final int esqueci_senha=0x7f060017;
+        public static final int digite_seu_email=0x7f060022;
+        public static final int email=0x7f060014;
+        public static final int error_field_required=0x7f06001f;
+        public static final int error_incorrect_password=0x7f06001e;
+        public static final int error_invalid_email=0x7f06001c;
+        public static final int error_invalid_password=0x7f06001d;
+        public static final int esqueci_senha=0x7f060021;
+        public static final int facebook_app_id=0x7f06000c;
         public static final int hello_world=0x7f060001;
-        public static final int meu_carrinho=0x7f060023;
-        public static final int minhas_listas=0x7f060021;
+        public static final int login_facebook=0x7f06000d;
+        public static final int login_google=0x7f060024;
+        public static final int meu_carrinho=0x7f060030;
+        public static final int minhas_listas=0x7f06002e;
+        public static final int nome=0x7f06000f;
         public static final int painel_user=0x7f060008;
-        public static final int plus_disconnect=0x7f060011;
-        public static final int plus_sign_out=0x7f060010;
-        public static final int pref_default_display_name=0x7f06001d;
-        public static final int pref_description_pedir_senha_sempre=0x7f06001b;
+        public static final int plus_disconnect=0x7f06001b;
+        public static final int plus_sign_out=0x7f06001a;
+        public static final int pref_default_display_name=0x7f06002a;
+        public static final int pref_description_pedir_senha_sempre=0x7f060028;
         /**  Strings related to Settings 
  Example General settings 
          */
-        public static final int pref_header_general=0x7f060019;
+        public static final int pref_header_general=0x7f060026;
         /**  Example settings for Notifications 
          */
-        public static final int pref_header_notifications=0x7f06001f;
-        public static final int pref_title_add_friends_to_messages=0x7f06001e;
-        public static final int pref_title_aviso_feira_pronta=0x7f060020;
-        public static final int pref_title_display_name=0x7f06001c;
-        public static final int pref_title_sempre_solicitar_senha=0x7f06001a;
-        public static final int produtos=0x7f060022;
+        public static final int pref_header_notifications=0x7f06002c;
+        public static final int pref_title_add_friends_to_messages=0x7f06002b;
+        public static final int pref_title_aviso_feira_pronta=0x7f06002d;
+        public static final int pref_title_display_name=0x7f060029;
+        public static final int pref_title_sempre_solicitar_senha=0x7f060027;
+        public static final int produtos=0x7f06002f;
         /**  Strings related to login 
          */
-        public static final int prompt_email=0x7f06000c;
-        public static final int prompt_password=0x7f06000d;
+        public static final int prompt_email=0x7f060016;
+        public static final int prompt_password=0x7f060017;
+        public static final int recuperar=0x7f060023;
+        public static final int salvar=0x7f060013;
+        public static final int selecionar=0x7f060015;
+        public static final int selecionar_supermercado=0x7f060031;
+        public static final int senha=0x7f060011;
         public static final int sobre=0x7f060009;
         public static final int title_activity_promo=0x7f060003;
-        public static final int title_activity_settings=0x7f060018;
+        public static final int title_activity_settings=0x7f060025;
         public static final int title_activity_supermercado=0x7f06000b;
         public static final int title_section1=0x7f060004;
         public static final int title_section2=0x7f060005;
         public static final int title_section3=0x7f060006;
+        public static final int voltar=0x7f06000e;
     }
     public static final class style {
         /** 

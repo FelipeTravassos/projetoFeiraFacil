@@ -1,6 +1,13 @@
 package com.esbr.feirafacilsmartphone;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+
+import com.esbr.feirafacilsmartphone.adapter.MinhasListasArrayAdapter;
+import com.esbr.feirafacilsmartphone.adapter.PromoArrayAdapter;
+import com.esbr.feirafacilsmartphone.supermercado.Produto;
+import com.esbr.feirafacilsmartphone.user.listas.ListaProdutos;
 
 import android.app.Activity;
 import android.app.ActionBar;
@@ -16,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class SupermercadoActivity extends Activity implements
@@ -35,11 +43,18 @@ public class SupermercadoActivity extends Activity implements
 	 */
 	ViewPager mViewPager;
 
+	String nomeSupermercado;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_supermercado);
 
+		if(getIntent().hasExtra("SUPERMERCADO")){
+			 Bundle extras = getIntent().getExtras();
+			 nomeSupermercado = extras.getString("SUPERMERCADO");
+		}
+		
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -121,7 +136,7 @@ public class SupermercadoActivity extends Activity implements
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
 		}
-
+		
 		@Override
 		public Fragment getItem(int position) {
 			// getItem is called to instantiate the fragment for the given page.
@@ -143,7 +158,7 @@ public class SupermercadoActivity extends Activity implements
 			case 0:
 				return getString(R.string.minhas_listas).toUpperCase(l);
 			case 1:
-				return getString(R.string.produtos).toUpperCase(l);
+				return nomeSupermercado.toUpperCase(l);
 			case 2:
 				return getString(R.string.meu_carrinho).toUpperCase(l);
 			}
@@ -161,10 +176,13 @@ public class SupermercadoActivity extends Activity implements
 		 */
 		private static final String ARG_SECTION_NUMBER = "section_number";
 
+		private static int pageNumber;
+		
 		/**
 		 * Returns a new instance of this fragment for the given section number.
 		 */
 		public static PlaceholderFragment newInstance(int sectionNumber) {
+			pageNumber = sectionNumber;
 			PlaceholderFragment fragment = new PlaceholderFragment();
 			Bundle args = new Bundle();
 			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -174,12 +192,35 @@ public class SupermercadoActivity extends Activity implements
 
 		public PlaceholderFragment() {
 		}
-
+		
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_supermercado,
+			View rootView = inflater.inflate(R.layout.fragment_promo,
 					container, false);
+			
+			if(pageNumber == 1){
+	
+				List<com.esbr.feirafacilsmartphone.user.listas.Produto> produtos = new ArrayList<com.esbr.feirafacilsmartphone.user.listas.Produto>();
+				produtos.add(new com.esbr.feirafacilsmartphone.user.listas.Produto("Arroz", "arroz123", 2));
+				produtos.add(new com.esbr.feirafacilsmartphone.user.listas.Produto("Feijão", "feijao123", 2));
+				produtos.add(new com.esbr.feirafacilsmartphone.user.listas.Produto("Macarrão parafuso", "macarraoParafuso123", 2));
+				
+				List<com.esbr.feirafacilsmartphone.user.listas.Produto> produtos2 = new ArrayList<com.esbr.feirafacilsmartphone.user.listas.Produto>();
+				produtos2.add(new com.esbr.feirafacilsmartphone.user.listas.Produto("Arroz", "arroz123", 2));
+				produtos2.add(new com.esbr.feirafacilsmartphone.user.listas.Produto("Feijão", "feijao123", 2));
+				produtos2.add(new com.esbr.feirafacilsmartphone.user.listas.Produto("Macarrão parafuso", "macarraoParafuso123", 2));
+				produtos2.add(new com.esbr.feirafacilsmartphone.user.listas.Produto("Carne de sol", "carneDeSol123", 4));
+				
+				ListView lv = (ListView) rootView.findViewById(R.id.list_prod_promo);
+	
+				ListaProdutos[] values = new ListaProdutos[3];
+				values[0] = (new ListaProdutos("Lista mensal", produtos));
+				values[1] = (new ListaProdutos("Lista quinsenal", produtos2));
+				values[2] = (new ListaProdutos("Lista churrasco", produtos));
+				
+				lv.setAdapter(new MinhasListasArrayAdapter(getActivity(), values)); 
+			}
 			return rootView;
 		}
 	}
