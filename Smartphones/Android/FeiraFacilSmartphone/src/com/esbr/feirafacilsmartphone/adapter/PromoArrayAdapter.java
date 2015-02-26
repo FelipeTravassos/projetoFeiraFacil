@@ -27,11 +27,11 @@ public class PromoArrayAdapter extends ArrayAdapter<Produto>{
  
 		View rowView = inflater.inflate(R.layout.prod_promo, parent, false);
 		TextView nomeTV = (TextView) rowView.findViewById(R.id.nomeProdPromo);
-		TextView descTV = (TextView) rowView.findViewById(R.id.descProdPromo);
+	//	TextView descTV = (TextView) rowView.findViewById(R.id.descProdPromo);
 		TextView precoTV = (TextView) rowView.findViewById(R.id.precoProdPromo);
 		
 		nomeTV.setText(values[position].getNome());
-		descTV.setText(values[position].getDesc());
+		//descTV.setText(values[position].getTipo());
 		precoTV.setText("R$ " + values[position].getPreco());
  
 		return rowView;

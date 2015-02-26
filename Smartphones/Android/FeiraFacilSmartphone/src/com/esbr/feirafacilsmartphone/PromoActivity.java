@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 import com.esbr.feirafacilsmartphone.adapter.PromoArrayAdapter;
+import com.esbr.feirafacilsmartphone.supermercado.CategoriaDeProduto;
 import com.esbr.feirafacilsmartphone.supermercado.Produto;
 
 import android.app.Activity;
@@ -238,16 +239,16 @@ public class PromoActivity extends Activity implements ActionBar.TabListener {
 			ListView lv = (ListView) rootView.findViewById(R.id.list_prod_promo);
 
 			Produto[] values = new Produto[10];
-			values[0] = (new Produto("Produto 1","Descrição do produto a", 140.0));
-			values[1] = (new Produto("Produto 2","Descrição do produto b", 40.0));
-			values[2] = (new Produto("Produto 3","Descrição do produto c", 1.25));
-			values[3] = (new Produto("Produto 4","Descrição do produto d", 0.75));
-			values[4] = (new Produto("Produto 5","Descrição do produto e", 90.0));
-			values[5] = (new Produto("Produto 6","Descrição do produto f", 79.90));
-			values[6] = (new Produto("Produto 7","Descrição do produto g", 250.0));
-			values[7] = (new Produto("Produto 8","Descrição do produto h", 50.0));
-			values[8] = (new Produto("Produto 9","Descrição do produto i", 76.34));
-			values[9] = (new Produto("Produto 0","Descrição do produto j", 2.38));
+			values[0] = (new Produto("Produto 1", 140.0, CategoriaDeProduto.BEBIDAS_ALCOOLICAS));
+			values[1] = (new Produto("Produto 2", 40.0, CategoriaDeProduto.BAZAR));
+			values[2] = (new Produto("Produto 3", 1.25, CategoriaDeProduto.DESCARTAVEIS));
+			values[3] = (new Produto("Produto 4", 0.75, CategoriaDeProduto.LIMPEZA));
+			values[4] = (new Produto("Produto 5", 90.0, CategoriaDeProduto.HIGIENE_SAUDE_E_BELEZA));
+			values[5] = (new Produto("Produto 6", 79.90, CategoriaDeProduto.PERECIVEIS_CONGELADOS_E_RESFRIADOS ));
+			values[6] = (new Produto("Produto 7", 250.0, CategoriaDeProduto.EQUIPAMENTOS_INSUMOS_E_SERVICOS));
+			values[7] = (new Produto("Produto 8",50.0, CategoriaDeProduto.MATINAIS));
+			values[8] = (new Produto("Produto 9", 76.34, CategoriaDeProduto.MERCEARIADEALTOGIRO));
+			values[9] = (new Produto("Produto 0", 2.38, CategoriaDeProduto.LIMPEZA));
 			
 			lv.setAdapter(new PromoArrayAdapter(getActivity(), values)); 
 			
