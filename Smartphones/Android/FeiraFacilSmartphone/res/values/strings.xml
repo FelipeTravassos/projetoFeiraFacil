@@ -13,7 +13,7 @@
     <string name="sobre">Sobre</string>
     <string name="ajuda">Ajuda</string>
     <string name="title_activity_supermercado">Supermercado</string>
-    <string name="facebook_app_id">311029272424522</string>
+    <string name="facebook_app_id">911950285504204</string>
     <string name="login_facebook">Entrar com facebook</string>
     <string name="voltar">voltar</string>
     <string name="nome">Nome:</string>
@@ -23,5 +23,6 @@
     <string name="salvar">Salvar</string>
     <string name="email">Email:</string>
     <string name="selecionar">Selecionar</string>
+    
 
 </resources>

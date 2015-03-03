@@ -29,8 +29,8 @@
             android:screenOrientation="unspecified" >
         </activity>
         <activity
-            android:name=".SupermercadoActivity"
-            android:label="@string/title_activity_supermercado" >
+            android:name="com.facebook.LoginActivity"
+             >
         </activity>
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
     </application>

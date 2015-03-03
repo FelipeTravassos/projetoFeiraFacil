@@ -3,9 +3,14 @@ package com.esbr.feirafacilsmartphone;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.esbr.feirafacilsmartphone.adapter.PromoArrayAdapter;
-import com.esbr.feirafacilsmartphone.supermercado.CategoriaDeProduto;
+import com.esbr.feirafacilsmartphone.server.TaskAllProducts;
 import com.esbr.feirafacilsmartphone.supermercado.Produto;
 
 import android.app.Activity;
@@ -21,6 +26,7 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.text.Layout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,7 +43,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class PromoActivity extends Activity implements ActionBar.TabListener {
+public class PromoActivity extends Activity {
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -46,8 +52,7 @@ public class PromoActivity extends Activity implements ActionBar.TabListener {
 	 * becomes too memory intensive, it may be best to switch to a
 	 * {@link android.support.v13.app.FragmentStatePagerAdapter}.
 	 */
-	SectionsPagerAdapter mSectionsPagerAdapter;
-	int selected;
+	
 
 	/**
 	 * The {@link ViewPager} that will host the section contents.
@@ -57,32 +62,42 @@ public class PromoActivity extends Activity implements ActionBar.TabListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_promo);
+		setContentView(R.layout.fragment_promo);
 
 	    getActionBar().setDisplayHomeAsUpEnabled(true);
-	    
-		final ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
-
-		mViewPager = (ViewPager) findViewById(R.id.pager);
-		mViewPager.setAdapter(mSectionsPagerAdapter);
-
-		mViewPager
-				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-					@Override
-					public void onPageSelected(int position) {
-						actionBar.setSelectedNavigationItem(position);						
-					}
-				});
-
-		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-			actionBar.addTab(actionBar.newTab()
-					.setText(mSectionsPagerAdapter.getPageTitle(i))
-					.setTabListener(this));
-		}
 		
+		ListView lv = (ListView) findViewById(R.id.list_prod_promo);
+		String result;
+		JSONArray json;
+		ArrayList<Produto> values = new ArrayList<Produto>();
+		Log.i("teste", "teste");
+		try {
+			
+			result = new TaskAllProducts().execute().get();
+			json = new JSONArray(result);
+			
+			for (int i = 0; i < json.length(); i++) {
+		       	JSONObject jsonObj = json.getJSONObject(i);
+		       	Produto obj = new Produto(jsonObj.get("name").toString(), Float.parseFloat(jsonObj.get("value").toString()),jsonObj.get("id_category").toString());
+		       	values.add(obj);
+
+		       	
+		    }
+		} catch (InterruptedException e1) {
+			
+			e1.printStackTrace();
+		} catch (ExecutionException e1) {
+			
+			e1.printStackTrace();
+		} catch (JSONException e) {
+			
+			e.printStackTrace();
+		}        
+		
+		lv.setAdapter(new PromoArrayAdapter(this,values )); 
+
+				
 	}
 
 	@Override
@@ -93,167 +108,13 @@ public class PromoActivity extends Activity implements ActionBar.TabListener {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
 		
-		if (id == R.id.selectsuper) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.selecionar_supermercado);
-	        builder.setMessage(getNomeSupermercado())
-	               .setPositiveButton(R.string.selecionar, new DialogInterface.OnClickListener() {
-	                   public void onClick(DialogInterface dialog, int id) {
-	                	   Intent myIntent = new Intent(getBaseContext(), SupermercadoActivity.class);
-		                   myIntent.putExtra("SUPERMERCADO", getNomeSupermercado());
-		                   startActivity(myIntent);
-	                   }
-	               })
-	               .setNegativeButton(R.string.voltar, new DialogInterface.OnClickListener() {
-	                   public void onClick(DialogInterface dialog, int id) {
-	                       // User cancelled the dialog
-	                   }
-	               });
-	        AlertDialog dialog = builder.create();
-	        dialog.show();
-	        return true;
-		}else if (id == R.id.ajuda) {
-			Toast toast = Toast.makeText(getApplicationContext(), "Ajuda", Toast.LENGTH_LONG);
-			toast.show();
-			return true;
-		}else if (id == R.id.painel_usuario) {
-			Toast toast = Toast.makeText(getApplicationContext(), "Painel usuário", Toast.LENGTH_LONG);
-			toast.show();
-			return true;
-		}else if (id == R.id.sobre) {
-			Toast toast = Toast.makeText(getApplicationContext(), "Sobre", Toast.LENGTH_LONG);
-			toast.show();
-			return true;
-		}else if (id == R.id.action_settings) {
-			Toast toast = Toast.makeText(getApplicationContext(), "Configurações", Toast.LENGTH_LONG);
-			toast.show();
-			return true;
-		}else if(id == android.R.id.home){
-			try{
-				NavUtils.navigateUpFromSameTask(this);
-			}catch(Exception e){	}
-	        return true;
-		}
 		return super.onOptionsItemSelected(item);
 	}
 
-	private String getNomeSupermercado() {
-		Locale l = Locale.getDefault();
-		switch (selected) {
-		case 0:	
-			return getString(R.string.title_section1).toUpperCase(l);
-		case 1:
-			return getString(R.string.title_section2).toUpperCase(l);
-		case 2:
-			return getString(R.string.title_section3).toUpperCase(l);
-		}
-		return null;
-	}
 	
-	@Override
-	public void onTabSelected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
-		// When the given tab is selected, switch to the corresponding page in
-		// the ViewPager.
-		selected = tab.getPosition();
-		mViewPager.setCurrentItem(tab.getPosition());
-	}
-
-	@Override
-	public void onTabUnselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
-	}
-
-	@Override
-	public void onTabReselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
-	}
-
-	/**
-	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-	 * one of the sections/tabs/pages.
-	 */
-	public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-		public SectionsPagerAdapter(FragmentManager fm) {
-			super(fm);
-		}
-
-		@Override
-		public Fragment getItem(int position) {
-			return PlaceholderFragment.newInstance(position + 1);
-		}
-
-		@Override
-		public int getCount() {
-			return 3;
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
-			switch (position) {
-			case 0:	
-				return getString(R.string.title_section1).toUpperCase(l);
-			case 1:
-				return getString(R.string.title_section2).toUpperCase(l);
-			case 2:
-				return getString(R.string.title_section3).toUpperCase(l);
-			}
-			return null;
-		}
-	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		private static final String ARG_SECTION_NUMBER = "section_number";
-
-		/**
-		 * Returns a new instance of this fragment for the given section number.
-		 */
-		public static PlaceholderFragment newInstance(int sectionNumber) {
-			PlaceholderFragment fragment = new PlaceholderFragment();
-			Bundle args = new Bundle();
-			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-			fragment.setArguments(args);
-			return fragment;
-		}
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_promo,
-					container, false);
-
-			ListView lv = (ListView) rootView.findViewById(R.id.list_prod_promo);
-
-			Produto[] values = new Produto[10];
-			values[0] = (new Produto("Produto 1", 140.0, CategoriaDeProduto.BEBIDAS_ALCOOLICAS));
-			values[1] = (new Produto("Produto 2", 40.0, CategoriaDeProduto.BAZAR));
-			values[2] = (new Produto("Produto 3", 1.25, CategoriaDeProduto.DESCARTAVEIS));
-			values[3] = (new Produto("Produto 4", 0.75, CategoriaDeProduto.LIMPEZA));
-			values[4] = (new Produto("Produto 5", 90.0, CategoriaDeProduto.HIGIENE_SAUDE_E_BELEZA));
-			values[5] = (new Produto("Produto 6", 79.90, CategoriaDeProduto.PERECIVEIS_CONGELADOS_E_RESFRIADOS ));
-			values[6] = (new Produto("Produto 7", 250.0, CategoriaDeProduto.EQUIPAMENTOS_INSUMOS_E_SERVICOS));
-			values[7] = (new Produto("Produto 8",50.0, CategoriaDeProduto.MATINAIS));
-			values[8] = (new Produto("Produto 9", 76.34, CategoriaDeProduto.MERCEARIADEALTOGIRO));
-			values[9] = (new Produto("Produto 0", 2.38, CategoriaDeProduto.LIMPEZA));
-			
-			lv.setAdapter(new PromoArrayAdapter(getActivity(), values)); 
-			
-			return rootView;
-		}
-	}
+	
+	
+	
 
 }

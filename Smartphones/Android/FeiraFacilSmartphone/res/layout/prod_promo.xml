@@ -17,16 +17,16 @@
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
+    <!-- <TextView
         android:id="@+id/descProdPromo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/imgProdPromo"
         android:layout_alignRight="@+id/precoProdPromo"
         android:layout_below="@+id/imgProdPromo"
-        android:text="Small Text"
+        android:text="Descrição Produto"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-
+ -->
     <ImageView
         android:id="@+id/imgProdPromo"
         android:layout_width="wrap_content"
