@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -26,6 +27,8 @@ public class CarrinhoActivity extends Activity {
 	private AlertDialog alerta; 
 	
 	private ListView lv;
+	
+	private TextView totalCompra;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,9 @@ public class CarrinhoActivity extends Activity {
 			
 		
 		lv.setAdapter(new CarrinhoArrayAdapter(this,carrinho.getListaItems())); 
+		
+		totalCompra = (TextView) findViewById(R.id.totalCompraValue);
+		totalCompra.setText("R$ " + carrinho.getValor_total());
 	}
 
 	@Override
@@ -71,6 +77,7 @@ public class CarrinhoActivity extends Activity {
 				Toast.makeText(CarrinhoActivity.this, "Não existe itens no carrinho", Toast.LENGTH_SHORT).show();
 			} else {
 				limparCarrinho();
+				totalCompra.setText("R$ " + carrinho.getValor_total());
 			}
 		}
 		return super.onOptionsItemSelected(item);
@@ -95,6 +102,7 @@ public class CarrinhoActivity extends Activity {
 					//produto.setQuantidade(produto.getQuantidade() - valorDigitadoPeloUser);
 				}
 				carrinho.removerItemCarrinho(produto);
+				totalCompra.setText("R$ " + carrinho.getValor_total());
 				Toast.makeText(CarrinhoActivity.this, "Item removido do carrinho", Toast.LENGTH_SHORT).show();
 				CarrinhoArrayAdapter adapter = new CarrinhoArrayAdapter(CarrinhoActivity.this,carrinho.getListaItems());
 				adapter.notifyDataSetChanged();
