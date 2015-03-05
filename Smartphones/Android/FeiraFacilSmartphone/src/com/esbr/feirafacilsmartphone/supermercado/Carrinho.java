@@ -57,6 +57,12 @@ public class Carrinho implements Serializable {
 		this.listaItens = listaItems;
 	}
 
+	public void limparCarrinho() {
+		setValor_total(0);
+		listaItens = new ArrayList<Produto>();
+		setListaItems(listaItens);		
+	}
+
 
 	
 }

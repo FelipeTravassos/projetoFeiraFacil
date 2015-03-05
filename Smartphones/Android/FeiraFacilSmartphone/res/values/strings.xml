@@ -24,5 +24,6 @@
     <string name="email">Email:</string>
     <string name="selecionar">Selecionar</string>
     <string name="title_activity_carrinho">Carrinho</string>
+    <string name="limpar_carrinho">Limpar Carrinho</string>
 
 </resources>

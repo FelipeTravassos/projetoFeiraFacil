@@ -66,8 +66,12 @@ public class CarrinhoActivity extends Activity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		if (id == R.id.limpar_carrinho) {
+			if (carrinho.getListaItems().size() == 0) {
+				Toast.makeText(CarrinhoActivity.this, "Não existe itens no carrinho", Toast.LENGTH_SHORT).show();
+			} else {
+				limparCarrinho();
+			}
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -102,4 +106,28 @@ public class CarrinhoActivity extends Activity {
 		alerta.show();
 	}
 
+	
+	private void limparCarrinho() {
+		android.app.AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Limpar Carrinho");
+		builder.setMessage("Deseja realmente remover todos os itens do carrinho?");
+		builder.setNegativeButton("Não", new DialogInterface.OnClickListener() { 
+			public void onClick(DialogInterface arg0, int arg1) { 
+				arg0.cancel();
+			} 
+		});
+		
+		builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() { 
+			public void onClick(DialogInterface arg0, int arg1) {
+				carrinho.limparCarrinho();
+				Toast.makeText(CarrinhoActivity.this, "Carrinho Limpo", Toast.LENGTH_SHORT).show();
+				CarrinhoArrayAdapter adapter = new CarrinhoArrayAdapter(CarrinhoActivity.this,carrinho.getListaItems());
+				adapter.notifyDataSetChanged();
+				lv.setAdapter(adapter); 
+				
+			} 
+		}); 
+		alerta = builder.create(); 
+		alerta.show();
+	}
 }
