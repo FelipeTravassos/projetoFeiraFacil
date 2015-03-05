@@ -4,7 +4,7 @@
     <string name="app_name">Feira Fácil</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Configurações</string>
-    <string name="title_activity_promo">Promoções</string>
+    <string name="title_activity_promo">Produtos</string>
     <string name="title_section1">Ideal pornto 100 reis</string>
     <string name="title_section2">Ideal Feira central</string>
     <string name="title_section3">Ideal Floriano Peixoto</string>
@@ -23,6 +23,6 @@
     <string name="salvar">Salvar</string>
     <string name="email">Email:</string>
     <string name="selecionar">Selecionar</string>
-    
+    <string name="title_activity_carrinho">Carrinho</string>
 
 </resources>

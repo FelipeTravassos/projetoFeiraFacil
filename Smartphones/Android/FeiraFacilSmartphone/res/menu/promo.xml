@@ -4,7 +4,7 @@
     <!-- Selecionar supermercado -->
     <item android:id="@+id/selectsuper"
           android:icon="@drawable/icone_finalizarfeira"
-          android:title="@string/hello_world" 
+          android:title="@string/title_activity_carrinho" 
           android:showAsAction="ifRoom" />
     
     <!-- Painel do usuario -->
