@@ -84,7 +84,12 @@ public class CarrinhoActivity extends Activity {
 		});
 		
 		builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() { 
-			public void onClick(DialogInterface arg0, int arg1) { 
+			public void onClick(DialogInterface arg0, int arg1) {
+				if (produto.getQuantidade() != 1) {
+					//perguntar a quantidade de itens para remover se existir mais de um item, se existir
+					//apenas 1, ele remove so esse
+					//produto.setQuantidade(produto.getQuantidade() - valorDigitadoPeloUser);
+				}
 				carrinho.removerItemCarrinho(produto);
 				Toast.makeText(CarrinhoActivity.this, "Item removido do carrinho", Toast.LENGTH_SHORT).show();
 				CarrinhoArrayAdapter adapter = new CarrinhoArrayAdapter(CarrinhoActivity.this,carrinho.getListaItems());

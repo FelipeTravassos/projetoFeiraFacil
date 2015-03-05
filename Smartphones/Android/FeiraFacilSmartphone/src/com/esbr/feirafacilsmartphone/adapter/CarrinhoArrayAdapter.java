@@ -27,14 +27,16 @@ public class CarrinhoArrayAdapter extends ArrayAdapter<Produto>{
 		LayoutInflater inflater = (LayoutInflater) context
 			.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
  
-		View rowView = inflater.inflate(R.layout.prod_promo, parent, false);
-		TextView nomeTV = (TextView) rowView.findViewById(R.id.nomeProdPromo);
+		View rowView = inflater.inflate(R.layout.prod_carrinho, parent, false);
+		TextView nomeProduto = (TextView) rowView.findViewById(R.id.nomeProdCarrinho);
 		//TextView descTV = (TextView) rowView.findViewById(R.id.descProdPromo);
-		TextView precoTV = (TextView) rowView.findViewById(R.id.precoProdPromo);
+		TextView precoProduto = (TextView) rowView.findViewById(R.id.precoProdCarrinho);
+		TextView quantidadeProduto = (TextView) rowView.findViewById(R.id.quantidadeProdCarrinho);
 		
-		nomeTV.setText(values.get(position).getNome());
+		nomeProduto.setText(values.get(position).getNome());
 		//descTV.setText(values[position].getCategoria());
-		precoTV.setText("R$ " + values.get(position).getPreco());
+		precoProduto.setText("R$ " + values.get(position).getPreco() * values.get(position).getQuantidade());
+		quantidadeProduto.setText("qnt. " + values.get(position).getQuantidade());
  
 		return rowView;
 	}

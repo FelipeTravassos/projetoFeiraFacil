@@ -71,7 +71,7 @@ public class PromoActivity extends Activity {
 			
 			for (int i = 0; i < json.length(); i++) {
 		       	JSONObject jsonObj = json.getJSONObject(i);
-		       	Produto obj = new Produto(jsonObj.get("name").toString(), Float.parseFloat(jsonObj.get("value").toString()),jsonObj.get("id_category").toString());
+		       	Produto obj = new Produto(jsonObj.get("name").toString(), Float.parseFloat(jsonObj.get("value").toString()),jsonObj.get("id_category").toString(),1);
 		       	values.add(obj);
 
 		       	
@@ -135,6 +135,11 @@ public class PromoActivity extends Activity {
 				if (carrinho.getListaItems().contains(produto)) {
 					Toast.makeText(PromoActivity.this, "Este item já se encontra no carrinho", Toast.LENGTH_SHORT).show();
 				} else {
+					//colocar dialog para selecionar a quantidade
+					// exemplo: produto.setQuantidade(5);
+					
+					
+					
 					carrinho.adicionarItemCarrinho(produto);
 					Toast.makeText(PromoActivity.this, "Item adicionado ao carrinho", Toast.LENGTH_SHORT).show();
 				}

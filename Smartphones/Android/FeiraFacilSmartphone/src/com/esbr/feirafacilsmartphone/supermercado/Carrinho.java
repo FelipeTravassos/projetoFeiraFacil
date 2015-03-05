@@ -44,13 +44,13 @@ public class Carrinho implements Serializable {
 	}
 	
 	public void adicionarItemCarrinho(Produto produto) {
+		valor_total += produto.getQuantidade()*produto.getPreco();
 		listaItens.add(produto);
-		valor_total += produto.getPreco();
 	}
 	
 	public void removerItemCarrinho(Produto produto) {
+		valor_total -= produto.getQuantidade()*produto.getPreco();			
 		listaItens.remove(produto);
-		valor_total -= produto.getPreco();
 	}
 
 	public void setListaItems(ArrayList<Produto> listaItems) {
