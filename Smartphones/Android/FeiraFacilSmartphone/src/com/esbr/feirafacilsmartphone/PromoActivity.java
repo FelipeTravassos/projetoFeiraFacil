@@ -1,6 +1,5 @@
 package com.esbr.feirafacilsmartphone;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -46,9 +45,9 @@ public class PromoActivity extends Activity {
 	
 	private AlertDialog alerta; 
 	
-	private ArrayList<Produto> values;
+	private ArrayList<Produto> values = new ArrayList<Produto>();
 	
-	private Carrinho carrinho = new Carrinho();
+	private Carrinho carrinho = Carrinho.getInstance();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +60,7 @@ public class PromoActivity extends Activity {
 		
 		String result;
 		JSONArray json;
-		values = new ArrayList<Produto>();
-		//carrinho = new Carrinho();
+
 		
 		Log.i("teste", "teste");
 		
@@ -114,9 +112,8 @@ public class PromoActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if(item.getItemId() == R.id.selectsuper){
-			Intent myIntent = new Intent(getBaseContext(), CarrinhoActivity.class);
 			
-			myIntent.putExtra("lista", (Serializable) carrinho.getCarrinho());
+			Intent myIntent = new Intent(getBaseContext(), CarrinhoActivity.class);
 			
 			startActivity(myIntent);
 		}
@@ -130,22 +127,21 @@ public class PromoActivity extends Activity {
 		builder.setNegativeButton("Não", new DialogInterface.OnClickListener() { 
 			public void onClick(DialogInterface arg0, int arg1) { 
 				arg0.cancel();
-				} 
-			});
+			} 
+		});
 		
 		builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() { 
 			public void onClick(DialogInterface arg0, int arg1) { 
-				carrinho.add(produto);				
-				Toast.makeText(PromoActivity.this, "Item adicionado ao carrinho", Toast.LENGTH_SHORT).show();
-				} 
-			}); 
+				if (carrinho.getListaItems().contains(produto)) {
+					Toast.makeText(PromoActivity.this, "Este item já se encontra no carrinho", Toast.LENGTH_SHORT).show();
+				} else {
+					carrinho.adicionarItemCarrinho(produto);
+					Toast.makeText(PromoActivity.this, "Item adicionado ao carrinho", Toast.LENGTH_SHORT).show();
+				}
+			} 
+		}); 
 		alerta = builder.create(); 
 		alerta.show();
 	}
-
-
-		
-	
-	
 
 }
