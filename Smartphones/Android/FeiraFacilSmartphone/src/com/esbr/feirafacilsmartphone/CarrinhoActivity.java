@@ -1,21 +1,25 @@
 package com.esbr.feirafacilsmartphone;
 
+import java.util.ArrayList;
+
+import com.esbr.feirafacilsmartphone.supermercado.Produto;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 public class CarrinhoActivity extends Activity {
 
+	public ArrayList<Produto> carrinho ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fragment_carrinho);
+		setContentView(R.layout.activity_carrinho);
 		
-		
-		ListView lv = (ListView) findViewById(R.id.list_prod_carrinho);
-		
+		Intent intent = getIntent();
+		carrinho = (ArrayList<Produto>)intent.getSerializableExtra("lista");
 		
 	}
 

@@ -1,5 +1,6 @@
 package com.esbr.feirafacilsmartphone;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -9,11 +10,13 @@ import org.json.JSONObject;
 
 import com.esbr.feirafacilsmartphone.adapter.PromoArrayAdapter;
 import com.esbr.feirafacilsmartphone.server.TaskAllProducts;
+import com.esbr.feirafacilsmartphone.supermercado.Carrinho;
 import com.esbr.feirafacilsmartphone.supermercado.Produto;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -45,7 +48,7 @@ public class PromoActivity extends Activity {
 	
 	private ArrayList<Produto> values;
 	
-	private ArrayList<Produto> carrinho;
+	private Carrinho carrinho = new Carrinho();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +62,7 @@ public class PromoActivity extends Activity {
 		String result;
 		JSONArray json;
 		values = new ArrayList<Produto>();
-		carrinho = new ArrayList<Produto>();
+		//carrinho = new Carrinho();
 		
 		Log.i("teste", "teste");
 		
@@ -110,6 +113,13 @@ public class PromoActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId() == R.id.selectsuper){
+			Intent myIntent = new Intent(getBaseContext(), CarrinhoActivity.class);
+			
+			myIntent.putExtra("lista", (Serializable) carrinho.getCarrinho());
+			
+			startActivity(myIntent);
+		}
 		return super.onOptionsItemSelected(item);
 	}
 	
@@ -125,7 +135,7 @@ public class PromoActivity extends Activity {
 		
 		builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() { 
 			public void onClick(DialogInterface arg0, int arg1) { 
-				carrinho.add(produto);
+				carrinho.add(produto);				
 				Toast.makeText(PromoActivity.this, "Item adicionado ao carrinho", Toast.LENGTH_SHORT).show();
 				} 
 			}); 
