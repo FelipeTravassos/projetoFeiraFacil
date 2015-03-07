@@ -25,41 +25,20 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class CarrinhoActivity extends Activity {
 
-	public Carrinho carrinho ;
 	
 	private AlertDialog alerta; 
 	
 	private ListView lv;
-	
-	private TextView totalCompra;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_carrinho);
 		
-		//Intent intent = getIntent();
-		//carrinho = (Carrinho) intent.getSerializableExtra("carrinho");
-		carrinho = Carrinho.getInstance();
 		
 		lv = (ListView) findViewById(R.id.list_prod_carrinho);
-		
-		lv.setOnItemClickListener(new OnItemClickListener() {
-            
-			@Override
-  			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+		lv.setAdapter(new CarrinhoArrayAdapter(this,Carrinho.getInstance().getListaItems())); 
 
-				removerItemCarrinho(carrinho.getListaItems().get(position));
-				
-			}
-        });
-			
-		
-		lv.setAdapter(new CarrinhoArrayAdapter(this,carrinho.getListaItems())); 
-		
-		totalCompra = (TextView) findViewById(R.id.totalCompraValue);
-		totalCompra.setText("R$ " + carrinho.getValor_total());
 	}
 
 	@Override
@@ -74,50 +53,12 @@ public class CarrinhoActivity extends Activity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.limpar_carrinho) {
-			if (carrinho.getListaItems().size() == 0) {
-				Toast.makeText(CarrinhoActivity.this, "Não existe itens no carrinho", Toast.LENGTH_SHORT).show();
-			} else {
-				limparCarrinho();
-				totalCompra.setText("R$ " + carrinho.getValor_total());
-			}
-		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 	
 	
-	private void removerItemCarrinho(final Produto produto) { 
-		android.app.AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(produto.getNome()); 
-		builder.setIcon(resize(R.drawable.icone_fazerfeira_telapromocoes,50));
-		builder.setMessage("Deseja remover este item do carrinho?");
-		builder.setNegativeButton("Não", new DialogInterface.OnClickListener() { 
-			public void onClick(DialogInterface arg0, int arg1) { 
-				arg0.cancel();
-			} 
-		});
-		
-		builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() { 
-			public void onClick(DialogInterface arg0, int arg1) {
-				if (produto.getQuantidade() != 1) {
-					//perguntar a quantidade de itens para remover se existir mais de um item, se existir
-					//apenas 1, ele remove so esse
-					//produto.setQuantidade(produto.getQuantidade() - valorDigitadoPeloUser);
-				}
-				carrinho.removerItemCarrinho(produto);
-				totalCompra.setText("R$ " + carrinho.getValor_total());
-				Toast.makeText(CarrinhoActivity.this, "Item removido do carrinho", Toast.LENGTH_SHORT).show();
-				CarrinhoArrayAdapter adapter = new CarrinhoArrayAdapter(CarrinhoActivity.this,carrinho.getListaItems());
-				adapter.notifyDataSetChanged();
-				lv.setAdapter(adapter); 
-				
-			} 
-		}); 
-		alerta = builder.create(); 
-		alerta.show();
-	}
-
+	
 	
 	private void limparCarrinho() {
 		android.app.AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -132,9 +73,9 @@ public class CarrinhoActivity extends Activity {
 		
 		builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() { 
 			public void onClick(DialogInterface arg0, int arg1) {
-				carrinho.limparCarrinho();
+				Carrinho.getInstance().limparCarrinho();
 				Toast.makeText(CarrinhoActivity.this, "Carrinho Limpo", Toast.LENGTH_SHORT).show();
-				CarrinhoArrayAdapter adapter = new CarrinhoArrayAdapter(CarrinhoActivity.this,carrinho.getListaItems());
+				CarrinhoArrayAdapter adapter = new CarrinhoArrayAdapter(CarrinhoActivity.this,Carrinho.getInstance().getListaItems());
 				adapter.notifyDataSetChanged();
 				lv.setAdapter(adapter); 
 				

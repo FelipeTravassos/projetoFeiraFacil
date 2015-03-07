@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="90dp"
     android:background="@drawable/tag_produtocomdivisoria"
     android:orientation="horizontal" >
 
@@ -22,8 +22,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:layout_marginTop="10dp"
+            android:layout_weight="0.6"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:orientation="vertical" >
 
@@ -45,8 +45,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:layout_marginTop="10dp"
+            android:layout_weight="0.2"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:orientation="vertical" >
 
@@ -66,14 +66,14 @@
 
                 <Button
                     android:id="@+id/buttonAddProd"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:background="@drawable/ic_adiciona_item"
                     android:text="" />
 
                 <TextView
-                    android:id="@+id/quantidadeAddProd"
+                    android:id="@+id/quantidadeProd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -82,8 +82,8 @@
 
                 <Button
                     android:id="@+id/buttonDelProd"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:background="@drawable/ic_deleta_item"
                     android:text="" />
@@ -91,13 +91,14 @@
             </LinearLayout>
             
             <Button
-                    android:id="@+id/addProdCarrinho"
-                    android:layout_width="120dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_adicionar_ao_carrinho2"
-                    android:text="" />
+                android:id="@+id/addProdCarrinho"
+                android:layout_width="78dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/ic_adicionar_ao_carrinho2"
+                android:text="" />
+
         </LinearLayout>
     </LinearLayout>
 

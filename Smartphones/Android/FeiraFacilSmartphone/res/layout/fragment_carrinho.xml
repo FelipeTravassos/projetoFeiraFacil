@@ -13,28 +13,9 @@
         android:id="@+id/list_prod_carrinho"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/totalCompraText"
         android:layout_alignLeft="@+id/section_label"
         android:layout_alignParentTop="true" >
 
     </ListView>
-
-    <TextView
-        android:id="@+id/totalCompraText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/list_prod_carrinho"
-        android:layout_alignParentBottom="true"
-        android:text="Total da Compra"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/totalCompraValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/list_prod_carrinho"
-        android:text="R$ 1200.00"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

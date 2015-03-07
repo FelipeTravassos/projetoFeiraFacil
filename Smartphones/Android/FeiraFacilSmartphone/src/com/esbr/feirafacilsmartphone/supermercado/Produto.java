@@ -4,18 +4,23 @@ import java.io.Serializable;
 
 public class Produto implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6632714485299171607L;
+	
 	private String nome;
-	private String categoria;
-	private float preco;
-	private int quantidade;
 	private String descricao;
+	private float preco;
+	private String categoria;
+	private int quantidade;
 	
 	public Produto(String nome, String descricao, float preco, String categoria, int quantidade) {
-		setDescricao(descricao);
-		setQuantidade(quantidade);
 		setNome(nome);
+		setDescricao(descricao);
 		setPreco(preco);
 		setCategoria(categoria);
+		setQuantidade(quantidade);
 		
 	}
 	

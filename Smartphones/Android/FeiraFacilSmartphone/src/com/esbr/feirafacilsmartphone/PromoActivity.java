@@ -84,7 +84,7 @@ public class PromoActivity extends Activity {
 		       	String descricaoProduto = "Colocar Descricao no JSON";
 		       	float valorUnitarioProduto = Float.parseFloat(jsonObj.get("value").toString());
 		       	String categoriaProduto = jsonObj.get("id_category").toString();
-		       	Produto obj = new Produto(nomeProduto, descricaoProduto, valorUnitarioProduto, categoriaProduto,1);
+		       	Produto obj = new Produto(nomeProduto, descricaoProduto, valorUnitarioProduto, categoriaProduto,0);
 		       	values.add(obj);
 
 		       	
