@@ -2,7 +2,6 @@ package com.esbr.feirafacilsmartphone.adapter;
 
 import java.util.ArrayList;
 
-import com.esbr.feirafacilsmartphone.CarrinhoActivity;
 import com.esbr.feirafacilsmartphone.R;
 import com.esbr.feirafacilsmartphone.supermercado.Carrinho;
 import com.esbr.feirafacilsmartphone.supermercado.Produto;
@@ -20,7 +19,6 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class CarrinhoArrayAdapter extends ArrayAdapter<Produto>{
 	

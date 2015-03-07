@@ -10,16 +10,18 @@ import org.apache.http.util.EntityUtils;
 public class Request {	
 	
 	public static String getAllProducts(){
+		
 		String url = "http://supermercadoideal.herokuapp.com/mobileService";
-        try {
+        String response = "";
+        
+		try {
             HttpClient client = new DefaultHttpClient();
             HttpGet get =  new HttpGet(url+"/getAllProducts");
             HttpResponse httpResponse = client.execute(get);
-            String response = EntityUtils.toString(httpResponse.getEntity());
-            return response;
+            response = EntityUtils.toString(httpResponse.getEntity());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
+        return response;
     }
 }

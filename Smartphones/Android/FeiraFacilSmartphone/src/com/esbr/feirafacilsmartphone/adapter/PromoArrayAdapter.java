@@ -2,7 +2,6 @@ package com.esbr.feirafacilsmartphone.adapter;
 
 import java.util.ArrayList;
 
-import com.esbr.feirafacilsmartphone.PromoActivity;
 import com.esbr.feirafacilsmartphone.R;
 import com.esbr.feirafacilsmartphone.supermercado.Carrinho;
 import com.esbr.feirafacilsmartphone.supermercado.Produto;
@@ -14,7 +13,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
