@@ -10,6 +10,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -87,6 +90,7 @@ public class CarrinhoActivity extends Activity {
 	private void removerItemCarrinho(final Produto produto) { 
 		android.app.AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(produto.getNome()); 
+		builder.setIcon(resize(R.drawable.icone_fazerfeira_telapromocoes,50));
 		builder.setMessage("Deseja remover este item do carrinho?");
 		builder.setNegativeButton("Não", new DialogInterface.OnClickListener() { 
 			public void onClick(DialogInterface arg0, int arg1) { 
@@ -118,6 +122,7 @@ public class CarrinhoActivity extends Activity {
 	private void limparCarrinho() {
 		android.app.AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Limpar Carrinho");
+		builder.setIcon(resize(R.drawable.icone_fazerfeira_telapromocoes,50));
 		builder.setMessage("Deseja realmente remover todos os itens do carrinho?");
 		builder.setNegativeButton("Não", new DialogInterface.OnClickListener() { 
 			public void onClick(DialogInterface arg0, int arg1) { 
@@ -137,5 +142,12 @@ public class CarrinhoActivity extends Activity {
 		}); 
 		alerta = builder.create(); 
 		alerta.show();
+	}
+	
+	private Drawable resize(int id, int scale) {
+		Drawable image = getResources().getDrawable(id);
+	    Bitmap b = ((BitmapDrawable)image).getBitmap();
+	    Bitmap bitmapResized = Bitmap.createScaledBitmap(b, scale, scale, false);
+	    return new BitmapDrawable(getResources(), bitmapResized);
 	}
 }

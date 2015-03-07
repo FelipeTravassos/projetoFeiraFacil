@@ -16,15 +16,23 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class PromoActivity extends Activity {
@@ -51,6 +59,7 @@ public class PromoActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_promo);
 
@@ -71,7 +80,11 @@ public class PromoActivity extends Activity {
 			
 			for (int i = 0; i < json.length(); i++) {
 		       	JSONObject jsonObj = json.getJSONObject(i);
-		       	Produto obj = new Produto(jsonObj.get("name").toString(), Float.parseFloat(jsonObj.get("value").toString()),jsonObj.get("id_category").toString(),1);
+		       	String nomeProduto = jsonObj.get("name").toString();
+		       	String descricaoProduto = "Colocar Descricao no JSON";
+		       	float valorUnitarioProduto = Float.parseFloat(jsonObj.get("value").toString());
+		       	String categoriaProduto = jsonObj.get("id_category").toString();
+		       	Produto obj = new Produto(nomeProduto, descricaoProduto, valorUnitarioProduto, categoriaProduto,1);
 		       	values.add(obj);
 
 		       	
@@ -86,21 +99,11 @@ public class PromoActivity extends Activity {
 			
 			e.printStackTrace();
 		}        
-		
-		
-		lv.setOnItemClickListener(new OnItemClickListener() {
-            
-			@Override
-  			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
 
-				adicionarItemCarrinho(values.get(position));
-				
-			}
-        });
+		
 			
 		lv.setAdapter(new PromoArrayAdapter(this,values )); 
-				
+		
 	}
 
 	@Override
@@ -123,6 +126,7 @@ public class PromoActivity extends Activity {
 	private void adicionarItemCarrinho(final Produto produto) { 
 		android.app.AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(produto.getNome()); 
+		builder.setIcon(resize(R.drawable.icone_confirmarfeiraselecionado,50));
 		builder.setMessage("Deseja adicionar este item ao carrinho?");
 		builder.setNegativeButton("Não", new DialogInterface.OnClickListener() { 
 			public void onClick(DialogInterface arg0, int arg1) { 
@@ -138,8 +142,6 @@ public class PromoActivity extends Activity {
 					//colocar dialog para selecionar a quantidade
 					// exemplo: produto.setQuantidade(5);
 					
-					
-					
 					carrinho.adicionarItemCarrinho(produto);
 					Toast.makeText(PromoActivity.this, "Item adicionado ao carrinho", Toast.LENGTH_SHORT).show();
 				}
@@ -147,6 +149,13 @@ public class PromoActivity extends Activity {
 		}); 
 		alerta = builder.create(); 
 		alerta.show();
+	}
+	
+	private Drawable resize(int id, int scale) {
+		Drawable image = getResources().getDrawable(id);
+	    Bitmap b = ((BitmapDrawable)image).getBitmap();
+	    Bitmap bitmapResized = Bitmap.createScaledBitmap(b, scale, scale, false);
+	    return new BitmapDrawable(getResources(), bitmapResized);
 	}
 
 }

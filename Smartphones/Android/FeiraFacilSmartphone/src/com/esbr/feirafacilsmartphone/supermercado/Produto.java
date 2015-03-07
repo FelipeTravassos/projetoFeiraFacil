@@ -8,8 +8,10 @@ public class Produto implements Serializable {
 	private String categoria;
 	private float preco;
 	private int quantidade;
+	private String descricao;
 	
-	public Produto(String nome, float preco, String categoria, int quantidade) {
+	public Produto(String nome, String descricao, float preco, String categoria, int quantidade) {
+		setDescricao(descricao);
 		setQuantidade(quantidade);
 		setNome(nome);
 		setPreco(preco);
@@ -46,5 +48,13 @@ public class Produto implements Serializable {
 	}
 	public void setPreco(float preco) {
 		this.preco = preco;
+	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
+	
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 }

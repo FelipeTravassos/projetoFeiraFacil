@@ -35,7 +35,7 @@ public class CarrinhoArrayAdapter extends ArrayAdapter<Produto>{
 		
 		nomeProduto.setText(values.get(position).getNome());
 		//descTV.setText(values[position].getCategoria());
-		precoProduto.setText("R$ " + values.get(position).getPreco() * values.get(position).getQuantidade());
+		precoProduto.setText("R$ " + String.format("%.2f", values.get(position).getPreco()).replace(".", ","));
 		quantidadeProduto.setText("qnt. " + values.get(position).getQuantidade());
  
 		return rowView;
