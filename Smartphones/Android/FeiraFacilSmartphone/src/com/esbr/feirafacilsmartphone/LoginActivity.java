@@ -210,7 +210,6 @@ public class LoginActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.criar_conta) {
-        	popUpCriarConta();
         	Toast toast = Toast.makeText(getApplicationContext(), "Criar conta", Toast.LENGTH_LONG);
 			toast.show();
             return true;
@@ -229,27 +228,6 @@ public class LoginActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
     
-    private void popUpCriarConta(){
-    	AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
-    	alertDialog.setTitle(R.string.criar_conta);
-
-    	LayoutInflater inflater = this.getLayoutInflater();
-    	alertDialog.setView(inflater.inflate(R.layout.criar_conta, null));
-    			
-        alertDialog.setPositiveButton(R.string.salvar,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int which) {
-                    }
-                });
-        alertDialog.setNegativeButton(R.string.voltar,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Write your code here to execute after dialog
-                        dialog.cancel();
-                    }
-                });
-        alertDialog.show();
-    }
     
     /**
      * Create popup if clicked 'I forgot my password'
