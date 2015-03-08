@@ -11,6 +11,7 @@ public class Produto implements Serializable {
 	 */
 	private static final long serialVersionUID = -6632714485299171607L;
 	
+	private String id;
 	private String nome;
 	private String descricao;
 	private float preco;
@@ -19,16 +20,24 @@ public class Produto implements Serializable {
 	private String imagemLink;
 	private Bitmap imagem;
 	
-	public Produto(String nome, String descricao, float preco, String categoria, int quantidade) {
+	public Produto(String id, String nome, String descricao, float preco, String categoria, int quantidade, String imagemLink) {
+		setId(id);
 		setNome(nome);
 		setDescricao(descricao);
 		setPreco(preco);
 		setCategoria(categoria);
 		setQuantidade(quantidade);
-		setImagemLink("");
+		setImagemLink(imagemLink);
 		setImagem(null);
 	}
 	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public String getId() {
+		return id;
+	}
 	public void setImagem(Bitmap imagem) {
 		this.imagem = imagem;
 	}

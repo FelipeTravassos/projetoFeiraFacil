@@ -135,6 +135,7 @@ public class PromoArrayAdapter extends ArrayAdapter<Produto>{
 			}
 		});
 	
+		
 		return rowView;
 	}
 }
