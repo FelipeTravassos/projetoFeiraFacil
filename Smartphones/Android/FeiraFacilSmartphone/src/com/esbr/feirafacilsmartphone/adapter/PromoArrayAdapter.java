@@ -1,5 +1,10 @@
 package com.esbr.feirafacilsmartphone.adapter;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import com.esbr.feirafacilsmartphone.R;
@@ -7,12 +12,16 @@ import com.esbr.feirafacilsmartphone.supermercado.Carrinho;
 import com.esbr.feirafacilsmartphone.supermercado.Produto;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,12 +46,17 @@ public class PromoArrayAdapter extends ArrayAdapter<Produto>{
 		TextView nomeProduto = (TextView) rowView.findViewById(R.id.nomeProdPromo);
 		TextView descricaoProduto = (TextView) rowView.findViewById(R.id.descProdPromo);
 		TextView precoProduto = (TextView) rowView.findViewById(R.id.precoProdPromo);
+		ImageView imagemProduto = (ImageView) rowView.findViewById(R.id.imgProdPromo);
 		
 		Produto produto = values.get(position); 
 		
 		nomeProduto.setText(produto.getNome());
 		descricaoProduto.setText(produto.getDescricao());
 		precoProduto.setText("R$ " + String.format("%.2f", produto.getPreco()).replace(".", ","));
+
+		if (produto.getImagem() != null) {
+			imagemProduto.setImageBitmap(produto.getImagem());
+		}
 		
 		Button adicionaQuantidadeItem = (Button) rowView.findViewById(R.id.buttonAddProd);
 		adicionaQuantidadeItem.setOnClickListener(new OnClickListener() {

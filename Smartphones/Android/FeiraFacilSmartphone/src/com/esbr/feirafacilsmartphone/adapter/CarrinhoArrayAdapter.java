@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class CarrinhoArrayAdapter extends ArrayAdapter<Produto>{
@@ -43,6 +44,7 @@ public class CarrinhoArrayAdapter extends ArrayAdapter<Produto>{
 		TextView descricaoProdutoCarrinho = (TextView) rowView.findViewById(R.id.descProdCarrinho);
 		TextView quantidadeProdutoCarrinho = (TextView) rowView.findViewById(R.id.quantidadeProdCarrinho);
 		TextView precoProdutoCarrinho = (TextView) rowView.findViewById(R.id.precoProdCarrinho);
+		ImageView imagemProdutoCarrinho = (ImageView) rowView.findViewById(R.id.imgProdCarrinho);
 		
 		Produto produtoCarrinho = values.get(position);
 		
@@ -50,6 +52,8 @@ public class CarrinhoArrayAdapter extends ArrayAdapter<Produto>{
 		descricaoProdutoCarrinho.setText(produtoCarrinho.getDescricao());
 		quantidadeProdutoCarrinho.setText(String.format("%02d",(produtoCarrinho.getQuantidade())));
 		precoProdutoCarrinho.setText("R$ " + String.format("%.2f", (produtoCarrinho.getPreco()*produtoCarrinho.getQuantidade())).replace(".", ","));
+		
+		imagemProdutoCarrinho.setImageBitmap(produtoCarrinho.getImagem());
 		
 		Button adicionaQuantidadeItem = (Button) rowView.findViewById(R.id.buttonAddProdCarrinho);
 		adicionaQuantidadeItem.setOnClickListener(new OnClickListener() {

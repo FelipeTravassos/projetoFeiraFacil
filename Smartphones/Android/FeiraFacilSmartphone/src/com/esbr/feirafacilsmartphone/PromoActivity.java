@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import com.esbr.feirafacilsmartphone.adapter.PromoArrayAdapter;
 import com.esbr.feirafacilsmartphone.server.TaskAllProducts;
 import com.esbr.feirafacilsmartphone.supermercado.Produto;
+import com.esbr.feirafacilsmartphone.util.DownloadImageTask;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -39,12 +40,21 @@ public class PromoActivity extends Activity {
 			
 			for (int i = 0; i < json.length(); i++) {
 		       	JSONObject jsonObj = json.getJSONObject(i);
-		       	String nomeProduto = jsonObj.get("name").toString();
-		       	String descricaoProduto = "Colocar Descricao no JSON";
-		       	float valorUnitarioProduto = Float.parseFloat(jsonObj.get("value").toString());
-		       	String categoriaProduto = jsonObj.get("id_category").toString();
+		       	
+		       	String nomeProduto = jsonObj.get("nome").toString();
+		       	String descricaoProduto = jsonObj.get("descricao").toString();
+		       	float valorUnitarioProduto = Float.parseFloat(jsonObj.get("preco").toString());
+		       	String categoriaProduto = jsonObj.get("categoria").toString();
+		       	String imagemLink = jsonObj.get("imagemLink").toString();
 		       	
 		       	Produto produto = new Produto(nomeProduto, descricaoProduto, valorUnitarioProduto, categoriaProduto,0);
+		       	
+		       	produto.setImagemLink(imagemLink);
+
+		       	if (produto.getImagem() == null) {
+		       		new DownloadImageTask(produto,PromoActivity.this).execute(imagemLink);
+		       	}
+		       	
 		       	values.add(produto);
 		    }
 			
@@ -56,8 +66,8 @@ public class PromoActivity extends Activity {
 			e.printStackTrace();
 		}        
 			
-		lv.setAdapter(new PromoArrayAdapter(this,values )); 
-		
+		lv.setAdapter(new PromoArrayAdapter(this,values)); 
+
 	}
 
 	@Override
@@ -74,7 +84,4 @@ public class PromoActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
-
 }

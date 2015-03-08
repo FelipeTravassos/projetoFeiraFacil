@@ -2,6 +2,8 @@ package com.esbr.feirafacilsmartphone.supermercado;
 
 import java.io.Serializable;
 
+import android.graphics.Bitmap;
+
 public class Produto implements Serializable {
 	
 	/**
@@ -14,6 +16,8 @@ public class Produto implements Serializable {
 	private float preco;
 	private String categoria;
 	private int quantidade;
+	private String imagemLink;
+	private Bitmap imagem;
 	
 	public Produto(String nome, String descricao, float preco, String categoria, int quantidade) {
 		setNome(nome);
@@ -21,7 +25,16 @@ public class Produto implements Serializable {
 		setPreco(preco);
 		setCategoria(categoria);
 		setQuantidade(quantidade);
-		
+		setImagemLink("");
+		setImagem(null);
+	}
+	
+	public void setImagem(Bitmap imagem) {
+		this.imagem = imagem;
+	}
+	
+	public Bitmap getImagem() {
+		return imagem;
 	}
 	
 	public void calcularValor() {
@@ -62,4 +75,13 @@ public class Produto implements Serializable {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	public String getImagemLink() {
+		return this.imagemLink;
+	}
+	
+	public void setImagemLink(String imagemLink) {
+		this.imagemLink = imagemLink;
+	}
+	
 }
