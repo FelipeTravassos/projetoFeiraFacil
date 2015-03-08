@@ -5,21 +5,15 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
-import com.esbr.feirafacilsmartphone.PromoActivity;
 import com.esbr.feirafacilsmartphone.supermercado.Produto;
 
-import android.R.integer;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.util.Log;
-import android.widget.Toast;
-
 
 public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
     
@@ -38,7 +32,7 @@ public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
     protected void onPreExecute() {
     	progressDialog = new ProgressDialog(context);
     	progressDialog.setTitle("Feira Fácil");
-    	progressDialog.setMessage("Carregando imagem...");
+    	progressDialog.setMessage("Carregando imagens...");
     	progressDialog.setIndeterminate(false);
     	progressDialog.show();
     }

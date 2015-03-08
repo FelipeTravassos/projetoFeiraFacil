@@ -66,7 +66,6 @@ public class PromoActivity extends Activity {
 		}        
 			
 		lv.setAdapter(new PromoArrayAdapter(this,values)); 
-		lv.refreshDrawableState();
 	}
 
 	@Override
