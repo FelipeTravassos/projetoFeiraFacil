@@ -13,7 +13,7 @@
         android:id="@+id/list_prod_carrinho"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonAddProd"
+        android:layout_above="@+id/buttonConfirmarFeira"
         android:layout_alignLeft="@+id/section_label"
         android:layout_alignParentTop="true" >
 
