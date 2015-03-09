@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"  >
     
     <!-- Selecionar Filtro-->
-	<item android:id="@+id/selecionarFiltro"
+	<item android:id="@+id/selecionarFiltroCarrinho"
           android:icon="@drawable/ic_selecionar_filtro"
           android:title="@string/title_activity_carrinho" 
           android:showAsAction="ifRoom" />

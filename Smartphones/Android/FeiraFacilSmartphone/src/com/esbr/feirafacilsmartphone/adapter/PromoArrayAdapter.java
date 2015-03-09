@@ -48,6 +48,8 @@ public class PromoArrayAdapter extends ArrayAdapter<Produto>{
 
 		if (produto.getImagem() != null) {
 			imagemProduto.setImageBitmap(produto.getImagem());
+			getItem(position).setImagem(produto.getImagem());
+			
 		}
 		
 		Button adicionaQuantidadeItem = (Button) rowView.findViewById(R.id.buttonAddProd);
@@ -115,15 +117,12 @@ public class PromoArrayAdapter extends ArrayAdapter<Produto>{
 					produto.setQuantidade(quantidadeItens);
 					Carrinho.getInstance().adicionarItemCarrinho(produto);
 				}
-				
+
 				quantidadeAddProd.setText("01");
 				precoProduto.setText("R$ " + String.format("%.2f", produto.getPreco()));
 				
-				if (quantidadeItens == 1) {
-					Toast.makeText(context, "Item adicionado no carrinho", Toast.LENGTH_SHORT).show();
-				} else {
-					Toast.makeText(context, "Itens adicionados no carrinho", Toast.LENGTH_SHORT).show();
-				}
+				Toast.makeText(context, "Adicionado " + quantidadeItens + " " + produto.getNome() + " ao carrinho", Toast.LENGTH_SHORT).show();
+
 			}
 		});
 	

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.esbr.feirafacilsmartphone.CarrinhoActivity" >
 
-    <item android:id="@+id/selecionarFiltro"
+    <item android:id="@+id/selecionarFiltroCarrinho"
           android:icon="@drawable/ic_selecionar_filtro"
           android:title="@string/title_activity_carrinho" 
           android:showAsAction="ifRoom" />

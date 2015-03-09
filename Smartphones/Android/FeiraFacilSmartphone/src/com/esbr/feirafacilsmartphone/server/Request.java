@@ -9,7 +9,7 @@ import org.apache.http.util.EntityUtils;
 
 public class Request {	
 	
-	public static String getAllProducts(){
+	public static String getProdutos(){
 		
 		String url = "http://54.94.179.210:8080";
         String response = "";
@@ -17,6 +17,22 @@ public class Request {
 		try {
             HttpClient client = new DefaultHttpClient();
             HttpGet get =  new HttpGet(url+"/produtos");
+            HttpResponse httpResponse = client.execute(get);
+            response = EntityUtils.toString(httpResponse.getEntity());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+	
+	public static String getCategorias(){
+		
+		String url = "http://54.94.179.210:8080";
+        String response = "";
+        
+		try {
+            HttpClient client = new DefaultHttpClient();
+            HttpGet get =  new HttpGet(url+"/categorias");
             HttpResponse httpResponse = client.execute(get);
             response = EntityUtils.toString(httpResponse.getEntity());
         } catch (Exception e) {
