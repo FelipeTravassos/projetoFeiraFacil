@@ -38,7 +38,7 @@ public class CarrinhoArrayAdapter extends ArrayAdapter<Produto>{
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
- 
+		
 		final View rowView = inflater.inflate(R.layout.prod_carrinho, parent, false);
 		
 		TextView nomeProdutoCarrinho = (TextView) rowView.findViewById(R.id.nomeProdCarrinho);
@@ -70,6 +70,7 @@ public class CarrinhoArrayAdapter extends ArrayAdapter<Produto>{
 				
 				quantidadeAddProd.setText(String.format("%02d",(produto.getQuantidade())));
 				precoProduto.setText("R$ " + String.format("%.2f", produto.getPreco()*produto.getQuantidade()).replace(".", ","));
+
 			}
 		});
 		

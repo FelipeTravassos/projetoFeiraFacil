@@ -74,9 +74,7 @@ public class CarrinhoActivity extends Activity {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
+				
 		Button buttonConfirmarFeira = (Button) findViewById(R.id.buttonConfirmarFeira);
 		buttonConfirmarFeira.setOnClickListener(new OnClickListener() {
 			
