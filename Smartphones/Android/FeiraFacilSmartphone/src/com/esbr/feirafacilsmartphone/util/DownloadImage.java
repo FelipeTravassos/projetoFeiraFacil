@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import com.esbr.feirafacilsmartphone.adapter.PromoArrayAdapter;
 import com.esbr.feirafacilsmartphone.supermercado.Produto;
 
 import android.app.ProgressDialog;
@@ -20,7 +21,7 @@ public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
 	private Produto produto;
 	private ProgressDialog progressDialog;
 	private Context context;
-	String pathToSave;
+	private String pathToSave;
 	
     public DownloadImage(Produto produto, final Context context) {
     	this.produto = produto;
@@ -83,6 +84,5 @@ public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
     protected void onPostExecute(Bitmap result) {
         produto.setImagem(result);
         progressDialog.dismiss();
-       
     }
 }

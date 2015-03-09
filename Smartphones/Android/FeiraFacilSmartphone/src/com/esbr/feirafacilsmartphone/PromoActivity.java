@@ -21,23 +21,25 @@ import android.widget.ListView;
 
 public class PromoActivity extends Activity {
 
-	private ArrayList<Produto> values = new ArrayList<Produto>();
+	private ArrayList<Produto> values;
+	private PromoArrayAdapter adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_promo);
 
 	    getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		ListView lv = (ListView) findViewById(R.id.list_prod_promo);
+		values = new ArrayList<Produto>();
+		
+		adapter = new PromoArrayAdapter(this,values);
+		lv.setAdapter(adapter);
 		
 		try {
-			
 			String result = new TaskAllProducts().execute().get();
 			JSONArray json = new JSONArray(result);
-			
 			for (int i = 0; i < json.length(); i++) {
 		       	JSONObject jsonObj = json.getJSONObject(i);
 		       	
@@ -52,20 +54,18 @@ public class PromoActivity extends Activity {
 
 		       	if (produto.getImagem() == null) {
 		       		new DownloadImage(produto,PromoActivity.this).execute(imagemLink);
+		       		
 		       	}
 		       	
 		       	values.add(produto);
 		    }
-			
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		} catch (ExecutionException e1) {
 			e1.printStackTrace();
 		} catch (JSONException e) {
 			e.printStackTrace();
-		}        
-			
-		lv.setAdapter(new PromoArrayAdapter(this,values)); 
+		}
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class PromoActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if(item.getItemId() == R.id.selectsuper){
+		if(item.getItemId() == R.id.vizualizarCarrinho){
 			Intent myIntent = new Intent(getBaseContext(), CarrinhoActivity.class);
 			startActivity(myIntent);
 		}

@@ -2,6 +2,7 @@ package com.esbr.feirafacilsmartphone.adapter;
 
 import java.util.ArrayList;
 
+import com.esbr.feirafacilsmartphone.CarrinhoActivity;
 import com.esbr.feirafacilsmartphone.R;
 import com.esbr.feirafacilsmartphone.supermercado.Carrinho;
 import com.esbr.feirafacilsmartphone.supermercado.Produto;
@@ -20,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CarrinhoArrayAdapter extends ArrayAdapter<Produto>{
 	
@@ -104,12 +106,12 @@ public class CarrinhoArrayAdapter extends ArrayAdapter<Produto>{
 				removerItemCarrinho(produto, context);
 			}
 		});
- 
+		
 		return rowView;
 	}
 	
 	
-	private void removerItemCarrinho(final Produto produto, Context context) { 
+	private void removerItemCarrinho(final Produto produto, final Context context) { 
 		android.app.AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setTitle(produto.getNome()); 
 		builder.setIcon(resize(context, R.drawable.icone_fazerfeira_telapromocoes,50));
@@ -124,6 +126,7 @@ public class CarrinhoArrayAdapter extends ArrayAdapter<Produto>{
 			public void onClick(DialogInterface arg0, int arg1) {
 				Carrinho.getInstance().removerItemCarrinho(produto);
 				notifyDataSetChanged();
+				Toast.makeText(context, "Concluído", Toast.LENGTH_SHORT).show();
 			} 
 		}); 
 		alerta = builder.create(); 

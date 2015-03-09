@@ -13,9 +13,18 @@
         android:id="@+id/list_prod_carrinho"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonAddProd"
         android:layout_alignLeft="@+id/section_label"
         android:layout_alignParentTop="true" >
 
     </ListView>
+
+    <Button
+        android:id="@+id/buttonConfirmarFeira"
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:layout_alignLeft="@+id/list_prod_carrinho"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/ic_confirmar_feira" />
 
 </RelativeLayout>

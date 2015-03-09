@@ -48,7 +48,6 @@ public class PromoArrayAdapter extends ArrayAdapter<Produto>{
 
 		if (produto.getImagem() != null) {
 			imagemProduto.setImageBitmap(produto.getImagem());
-			notifyDataSetChanged();
 		}
 		
 		Button adicionaQuantidadeItem = (Button) rowView.findViewById(R.id.buttonAddProd);

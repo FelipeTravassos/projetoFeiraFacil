@@ -2,10 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.esbr.feirafacilsmartphone.CarrinhoActivity" >
 
-    <item
-        android:id="@+id/limpar_carrinho"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/limpar_carrinho"/>
+    <item android:id="@+id/selecionarFiltro"
+          android:icon="@drawable/ic_selecionar_filtro"
+          android:title="@string/title_activity_carrinho" 
+          android:showAsAction="ifRoom" />
+    
+     <item android:id="@+id/limparCarrinho"
+          android:icon="@drawable/ic_limpar_carrinho"
+          android:title="@string/title_activity_carrinho" 
+          android:showAsAction="ifRoom" />
+
 
 </menu>
