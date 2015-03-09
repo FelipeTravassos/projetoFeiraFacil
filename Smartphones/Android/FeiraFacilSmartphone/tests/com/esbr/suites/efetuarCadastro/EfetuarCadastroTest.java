@@ -22,7 +22,7 @@ public class EfetuarCadastroTest {
 	}
 
 	@Test
-	public void UC02TC004EfetuarCadastroFaltandoConfirmaçãoDeEmail() {
+	public void UC02TC004EfetuarCadastroFaltandoConfirmacaoDeEmail() {
 		fail("Not yet implemented");
 	}
 
@@ -42,7 +42,7 @@ public class EfetuarCadastroTest {
 	}
 
 	@Test
-	public void UC02TC008EfetuarCadastroFaltandoConfirmaçãoDeSenha() {
+	public void UC02TC008EfetuarCadastroFaltandoConfirmacaoDeSenha() {
 		fail("Not yet implemented");
 	}
 

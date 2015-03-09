@@ -64,11 +64,17 @@ public class Carrinho implements Serializable {
 	}
 	
 	public String toString (){
-		String result ="";
+			
+		String formater = "%-1s %40s %20s\n";
+		String formater1 = "%-1s %20s %20s\n";
+		String result =  String.format(formater ,"Nome","Qtd","PreçoUn.") ;
+		System.out.println(result);
 		for (int i = 0; i < listaItens.size() ; i++) {
 			Produto produto = listaItens.get(i);
-			result += produto.getNome() +" " + produto.getQuantidade() + " " +produto.getPreco() +"\n";
+			result += String.format(formater1, produto.getNome(),produto.getQuantidade(), produto.getPreco());
+			//result += produto.getNome() +" " + produto.getQuantidade() + " " +produto.getPreco() +"\n";
 		}
+		
 			
 		return result;
 		

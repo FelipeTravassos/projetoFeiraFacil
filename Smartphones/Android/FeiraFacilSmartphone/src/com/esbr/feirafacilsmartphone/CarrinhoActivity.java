@@ -38,6 +38,7 @@ import android.widget.Toast;
 public class CarrinhoActivity extends Activity {
 	Mail mail = Mail.getInstance();
 	private String mailTo;
+	private String name;
 	private CarrinhoArrayAdapter adapter;
 	
 	private ListView lv;
@@ -83,7 +84,8 @@ public class CarrinhoActivity extends Activity {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		mailTo = (String)getIntent().getExtras().get("email");	
+		mailTo = (String)getIntent().getExtras().get("email");
+		name = (String)getIntent().getExtras().get("nome");
 		Button buttonConfirmarFeira = (Button) findViewById(R.id.buttonConfirmarFeira);
 		buttonConfirmarFeira.setOnClickListener(new OnClickListener() {
 			
@@ -93,7 +95,7 @@ public class CarrinhoActivity extends Activity {
 					Toast.makeText(CarrinhoActivity.this, "Nenhum item no carrinho", Toast.LENGTH_SHORT).show();
 				}else{
 					try {
-						Message message = mail.buildContent(Carrinho.getInstance(),mailTo
+						Message message = mail.buildContent(Carrinho.getInstance(),mailTo, name
 								);
 						new MailTask(CarrinhoActivity.this).execute(message);
 					} catch (AddressException e) {

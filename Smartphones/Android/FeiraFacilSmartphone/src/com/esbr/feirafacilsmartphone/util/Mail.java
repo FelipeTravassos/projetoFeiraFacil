@@ -49,21 +49,27 @@ public class Mail  {
     }
 
     
-    public Message buildContent(final Carrinho carrinho, String emailTO)
+    public Message buildContent(final Carrinho carrinho, String emailTO, String name)
             throws UnsupportedEncodingException, MessagingException {
-        emailBody = contructEmailBody(carrinho);
+        emailBody = contructEmailBody(carrinho,name);
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress("test.supermercadoideal", "Supermercado Ideal"));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(
                 emailTO));
         message.setSubject(subject);
         message.setText(emailBody);
+        
+        
 
         return message;
     }
 
-    public String contructEmailBody(final Carrinho carrinho) {
-        String asw = carrinho.toString();
+    public String contructEmailBody(final Carrinho carrinho,String name) {
+        String asw = "Caro senhor "+ name+", \n\n"+
+        		"Recebemos sua solicitação de compra. Estamos analisando seu pedido e entraremos em contato.\n\n"+	
+        		carrinho.toString()
+        		+"\nAtenciosamente\n"
+        		+"Equipe Supermercado Ideal";
                 
        
         return asw;

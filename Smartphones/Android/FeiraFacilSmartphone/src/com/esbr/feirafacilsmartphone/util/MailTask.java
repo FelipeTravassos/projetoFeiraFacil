@@ -4,6 +4,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Transport;
 
+import com.esbr.feirafacilsmartphone.R;
 import com.esbr.feirafacilsmartphone.supermercado.Carrinho;
 
 import android.app.Activity;
@@ -19,9 +20,9 @@ public class MailTask extends AsyncTask<Message, Void, Void>{
 	 public MailTask(
 		        final Activity act) {
 		        this.activity = act;
-		        //progressDialog = ProgressDialog.show(act,
-		        //        act.getText(R.string.please_wait),
-		         //       act.getText(R.string.sending_order), true);
+		        progressDialog = ProgressDialog.show(act,
+		                act.getText(R.string.please_wait),
+		                act.getText(R.string.sending_order), true);
 		    }
 
 	 @Override
@@ -33,8 +34,8 @@ public class MailTask extends AsyncTask<Message, Void, Void>{
 	 protected final void onPostExecute(final Void aVoid) {
 		 super.onPostExecute(aVoid);
 		 Carrinho.getInstance().limparCarrinho();;
-		        
-		        Toast.makeText(activity.getApplicationContext(), "email enviado",
+		        progressDialog.dismiss();
+		        Toast.makeText(activity.getApplicationContext(), R.string.sucess_order,
 		                Toast.LENGTH_LONG).show();
 		        
 		        activity.finish();
