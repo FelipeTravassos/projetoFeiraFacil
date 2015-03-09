@@ -62,6 +62,17 @@ public class Carrinho implements Serializable {
 		listaItens = new ArrayList<Produto>();
 		setListaItems(listaItens);		
 	}
+	
+	public String toString (){
+		String result ="";
+		for (int i = 0; i < listaItens.size() ; i++) {
+			Produto produto = listaItens.get(i);
+			result += produto.getNome() +" " + produto.getQuantidade() + " " +produto.getPreco() +"\n";
+		}
+			
+		return result;
+		
+	}
 
 
 	

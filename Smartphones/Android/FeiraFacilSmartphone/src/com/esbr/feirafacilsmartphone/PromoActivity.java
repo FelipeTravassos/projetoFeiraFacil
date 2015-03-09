@@ -36,7 +36,7 @@ public class PromoActivity extends Activity {
 	private ArrayList<String> categorias;
 	private PromoArrayAdapter adapter;
 	private AlertDialog alerta;
-	
+	private String mail;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -86,7 +86,7 @@ public class PromoActivity extends Activity {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		
+		mail = getIntent().getBundleExtra("bundle").getString("email");
 	}
 
 	@Override
@@ -104,6 +104,7 @@ public class PromoActivity extends Activity {
 		
 			case R.id.vizualizarCarrinho:
 				Intent myIntent = new Intent(getBaseContext(), CarrinhoActivity.class);
+				myIntent.putExtra("email", mail);
 				startActivity(myIntent);
 				return true;
 				

@@ -1,7 +1,12 @@
 package com.esbr.feirafacilsmartphone;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,6 +16,8 @@ import com.esbr.feirafacilsmartphone.adapter.CarrinhoArrayAdapter;
 import com.esbr.feirafacilsmartphone.server.TaskAllCategorias;
 import com.esbr.feirafacilsmartphone.supermercado.Carrinho;
 import com.esbr.feirafacilsmartphone.supermercado.Produto;
+import com.esbr.feirafacilsmartphone.util.Mail;
+import com.esbr.feirafacilsmartphone.util.MailTask;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -18,6 +25,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,7 +36,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class CarrinhoActivity extends Activity {
-	
+	Mail mail = Mail.getInstance();
+	private String mailTo;
 	private CarrinhoArrayAdapter adapter;
 	
 	private ListView lv;
@@ -74,7 +83,7 @@ public class CarrinhoActivity extends Activity {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-				
+		mailTo = (String)getIntent().getExtras().get("email");	
 		Button buttonConfirmarFeira = (Button) findViewById(R.id.buttonConfirmarFeira);
 		buttonConfirmarFeira.setOnClickListener(new OnClickListener() {
 			
@@ -82,7 +91,20 @@ public class CarrinhoActivity extends Activity {
 			public void onClick(View v) {
 				if (Carrinho.getInstance().getListaItems().size() == 0) {
 					Toast.makeText(CarrinhoActivity.this, "Nenhum item no carrinho", Toast.LENGTH_SHORT).show();
+				}else{
+					try {
+						Message message = mail.buildContent(Carrinho.getInstance(),mailTo
+								);
+						new MailTask(CarrinhoActivity.this).execute(message);
+					} catch (AddressException e) {
+						Log.e(e.toString(), e.getMessage());
+					} catch (MessagingException e) {
+						Log.e(e.toString(), e.getMessage());
+					} catch (UnsupportedEncodingException e) {
+						Log.e(e.toString(), e.getMessage());
+					}
 				}
+					
 				
 			}
 		});
