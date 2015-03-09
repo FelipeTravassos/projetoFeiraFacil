@@ -71,7 +71,7 @@ public class PromoActivity extends Activity {
 		       	
 		       	Produto produto = new Produto(id, nomeProduto, descricaoProduto, valorUnitarioProduto, categoriaProduto, 0, imagemLink);
 		       	
-		       	new DownloadImage(produto,PromoActivity.this).execute(imagemLink);
+		       	new DownloadImage(produto, adapter).execute(imagemLink);
 		       	
 		       	values.add(produto);
 		    }

@@ -8,9 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.esbr.feirafacilsmartphone.adapter.CarrinhoArrayAdapter;
-import com.esbr.feirafacilsmartphone.adapter.PromoArrayAdapter;
 import com.esbr.feirafacilsmartphone.server.TaskAllCategorias;
-import com.esbr.feirafacilsmartphone.server.TaskAllProdutos;
 import com.esbr.feirafacilsmartphone.supermercado.Carrinho;
 import com.esbr.feirafacilsmartphone.supermercado.Produto;
 

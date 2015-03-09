@@ -19,23 +19,18 @@ import android.os.Environment;
 public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
     
 	private Produto produto;
-	private ProgressDialog progressDialog;
-	private Context context;
 	private String pathToSave;
+	private PromoArrayAdapter adapter;
 	
-    public DownloadImage(Produto produto, final Context context) {
+    public DownloadImage(Produto produto, PromoArrayAdapter adapter) {
     	this.produto = produto;
-    	this.context = context;
+    	this.adapter = adapter;
     	pathToSave = Environment.getExternalStorageDirectory().getPath() + "/feirafacil/imagens/produtos";
     }
     
     @Override
     protected void onPreExecute() {
-    	progressDialog = new ProgressDialog(context);
-    	progressDialog.setTitle("Feira Fácil");
-    	progressDialog.setMessage("Carregando imagens...");
-    	progressDialog.setIndeterminate(false);
-    	progressDialog.show();
+
     }
     
     @Override
@@ -83,6 +78,6 @@ public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
     @Override
     protected void onPostExecute(Bitmap result) {
         produto.setImagem(result);
-        progressDialog.dismiss();
+        adapter.notifyDataSetChanged();
     }
 }
