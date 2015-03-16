@@ -25,5 +25,8 @@
     <string name="selecionar">Selecionar</string>
     <string name="title_activity_carrinho">Carrinho</string>
     <string name="limpar_carrinho">Limpar Carrinho</string>
+    <string name="please_wait">Por favor, espere</string>
+    <string name="sucess_order">Pedido realizado com sucesso</string>
+    <string name="sending_order">Enviando pedido</string>
 
 </resources>
