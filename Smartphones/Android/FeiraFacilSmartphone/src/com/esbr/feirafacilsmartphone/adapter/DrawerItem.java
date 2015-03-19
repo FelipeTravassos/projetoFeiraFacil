@@ -48,7 +48,7 @@ public class DrawerItem {
 		return imagem;
 	}
 
-	public void setImagem(Bitmap image) {
+	public void setImagem(Bitmap imagem) {
 		this.imagem = imagem;
 	}
 }

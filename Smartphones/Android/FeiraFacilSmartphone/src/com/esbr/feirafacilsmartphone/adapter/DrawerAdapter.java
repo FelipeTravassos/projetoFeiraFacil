@@ -1,12 +1,12 @@
 package com.esbr.feirafacilsmartphone.adapter;
 
+import com.esbr.feirafacilsmartphone.R;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import com.esbr.feirafacilsmartphone.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class DrawerAdapter extends BaseAdapter{
+public class DrawerAdapter extends BaseAdapter {
 
 	private static final int TYPE_ITEM = 0;
 	private static final int TYPE_SEPARATOR = 1;
@@ -118,9 +118,7 @@ public class DrawerAdapter extends BaseAdapter{
 				
 				
 				icon = (ImageView) view.findViewById(R.id.icon);
-				if (item.getImagem() != null) {
-					icon.setImageBitmap(item.getImagem());
-				}
+				icon.setImageBitmap(item.getImagem());
 				
 				
 			} else if (item.getTipo().equals("menu")) {

@@ -17,7 +17,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/caixa_foto_selecionado" />
+            android:src="@drawable/ic_launcher" />
 
         <TextView
             android:id="@+id/title"
