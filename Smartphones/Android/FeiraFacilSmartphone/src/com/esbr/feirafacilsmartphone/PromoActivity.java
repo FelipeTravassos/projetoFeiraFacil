@@ -235,17 +235,16 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 			adapter = new PromoArrayAdapter(PromoActivity.this, produtosFiltrados);
 			lv.setAdapter(adapter);
 			adapter.notifyDataSetChanged();		
-			drawerAdapter.resetarCheck();
-			getActionBar().setTitle(titleMenu);
+			
 			getActionBar().setSubtitle("Categorias");
+			getActionBar().setTitle(titleMenu);
 			
 		} else if (titleMenu.equalsIgnoreCase("Solicitados") || titleMenu.equalsIgnoreCase("Concluídos")) {
-			drawerAdapter.resetarCheck();
-			getActionBar().setTitle(titleMenu);
 			getActionBar().setSubtitle("Pedidos");
+			getActionBar().setTitle(titleMenu);
 		}
 		
-		;
+		drawerAdapter.resetarCheck();
 		drawerAdapter.setChecked(position, true);
 		drawer.closeDrawer(listView);
 	}
