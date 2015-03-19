@@ -176,7 +176,7 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		
 		drawerAdapter = new DrawerAdapter(this);
 		
-		//drawerAdapter.adicionarInformacaoUsuario("Gilles Medeiros Henriques", R.drawable.caixa_foto);
+		drawerAdapter.adicionarInformacaoUsuario("Gilles Medeiros Henriques", R.drawable.caixa_foto);
 		drawerAdapter.adicionarMenu(menuTitles.get(0));
 		
 		
