@@ -3,7 +3,8 @@
     android:id="@+id/ns_menu_row"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@color/cyan" >
     
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +27,9 @@
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
             android:text="Medium Text"
+            android:textColor="@color/com_facebook_loginview_text_color"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+        
     </LinearLayout>
     
 	<View
@@ -35,8 +38,7 @@
         android:layout_height="1dp"
         android:visibility="visible"
         android:layout_marginBottom="1dp"
-        android:layout_marginTop="1dp"			        
-        android:background="@color/cyan" />
+        android:layout_marginTop="1dp" />
     
     
 </LinearLayout>

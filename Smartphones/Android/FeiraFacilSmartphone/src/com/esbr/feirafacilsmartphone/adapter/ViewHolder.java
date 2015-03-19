@@ -9,15 +9,11 @@ public class ViewHolder {
 	private TextView title;
     private ImageView icon;
     private LinearLayout colorLinear;
-    private View viewNavigation;
 
-    public ViewHolder(
-        final TextView t, final ImageView ic, final LinearLayout cl,
-        final View vn) {
+    public ViewHolder(final TextView t, final ImageView ic, final LinearLayout cl) {
         this.setTitle(t);
         this.setIcon(ic);
         this.setColorLinear(cl);
-        this.setViewNavigation(vn);
     }
 
     /**
@@ -74,22 +70,5 @@ public class ViewHolder {
         this.colorLinear = cl;
     }
 
-    /**
-     * Get a value of viewNavigation.
-     * 
-     * @return View v
-     */
-    public final View getViewNavigation() {
-        return viewNavigation;
-    }
-
-    /**
-     * Set a value of viewNavigation.
-     * 
-     * @param vn vn
-     */
-    public final void setViewNavigation(final View vn) {
-        this.viewNavigation = vn;
-    }
 }
 

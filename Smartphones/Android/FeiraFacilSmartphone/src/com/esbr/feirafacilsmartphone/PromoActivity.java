@@ -86,7 +86,7 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		       	
 		       	Produto produto = new Produto(id, nomeProduto, descricaoProduto, valorUnitarioProduto, categoriaProduto, 0, imagemLink);
 		       	
-		       	new DownloadImage(produto, adapter).execute(imagemLink);
+		       	new DownloadImage(produto, adapter).execute(imagemLink).get();
 		       	
 		       	values.add(produto);
 		    }
@@ -140,9 +140,7 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		
 		return true;
 	}
-
 	
-		
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -167,7 +165,8 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		menuTitles = new ArrayList<String>();
 		
 		menuTitles.add("nameFacebook");
-		menuTitles.add("Categorias");		
+		menuTitles.add("Categorias");	
+		menuTitles.add("Pedidos");
 		
 		drawerAdapter = new DrawerAdapter(this);
 		
@@ -178,9 +177,11 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		
 		for (int i = 0; i < categorias.size(); i++) {
 			menuTitles.add(categorias.get(i).toString());
-			drawerAdapter.adicionarCategoria(menuTitles.get(i+2), R.drawable.caixa_foto);
+			drawerAdapter.adicionarCategoria(menuTitles.get(i+3), R.drawable.caixa_foto);
 			
 		}	
+		
+		drawerAdapter.adicionarMenu(menuTitles.get(2));
 	}
 	
 	@Override

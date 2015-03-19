@@ -104,7 +104,6 @@ public class DrawerAdapter extends BaseAdapter {
 		if (view == null) {
 
 			int layout = 0;
-			View viewNavigation = null;
 
 			TextView title = null;
 			ImageView icon = null;
@@ -138,10 +137,9 @@ public class DrawerAdapter extends BaseAdapter {
 
 			
 			title = (TextView) view.findViewById(R.id.title);
-			viewNavigation = view.findViewById(R.id.viewNavigation);
 			linearColor = (LinearLayout) view.findViewById(R.id.ns_menu_row);
 
-			view.setTag(new ViewHolder(title, icon, linearColor, viewNavigation));
+			view.setTag(new ViewHolder(title, icon, linearColor));
 
 		}
 
@@ -168,11 +166,12 @@ public class DrawerAdapter extends BaseAdapter {
 			}
 		}
 
-		if (item != null && !item.getTipo().equals("menu")) {
+		if (item != null && !item.getTipo().equals("menu") && !item.getTipo().equals("informacao_usuario")) {
 			if (checkedItems.contains(Integer.valueOf(position))) {
-				holder.getViewNavigation().setVisibility(View.VISIBLE);
+				view.setBackgroundColor(context.getResources().getColor(R.color.cyan));
+				
 			} else {
-				holder.getViewNavigation().setVisibility(View.GONE);
+				view.setBackgroundColor(context.getResources().getColor(R.color.white));
 			}
 		}
 

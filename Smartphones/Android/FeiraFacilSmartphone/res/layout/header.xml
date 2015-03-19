@@ -4,8 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+    
 	<TextView
         android:id="@+id/title"
+        android:text="adasdasda"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
@@ -19,13 +21,4 @@
         android:textAppearance="@android:style/TextAppearance.Small"
         android:textStyle="bold" />
     
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:visibility="visible"
-        android:layout_marginBottom="1dp"
-        android:layout_marginTop="1dp"			        
-        android:background="@color/gray" />
-    
-
 </LinearLayout>
