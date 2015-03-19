@@ -45,6 +45,7 @@ public class DrawerAdapter extends BaseAdapter{
 	
 	public final void adicionarInformacaoUsuario(final String title, final int icon) {
 		itemDrawer.add(new DrawerItem(title, icon, "informacao_usuario"));
+		separatorsSet.add(itemDrawer.size() - 1);
 	}
 
 	@Override

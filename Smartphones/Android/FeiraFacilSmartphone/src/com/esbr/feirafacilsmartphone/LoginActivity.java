@@ -100,7 +100,7 @@ public class LoginActivity extends Activity {
 					if(user!=null){
 						Intent myIntent = new Intent(getBaseContext(), PromoActivity.class);
 						Bundle bundle = new Bundle();
-						bundle.putCharSequence("name", user.getFirstName());
+						bundle.putCharSequence("name", user.getName());
 						bundle.putCharSequence("email", user.getProperty("email").toString());
 						myIntent.putExtra("bundle", bundle);
 			        	startActivity(myIntent);

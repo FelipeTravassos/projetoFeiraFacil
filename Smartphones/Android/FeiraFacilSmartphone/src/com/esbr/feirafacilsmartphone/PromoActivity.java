@@ -140,7 +140,7 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		drawer.setDrawerListener(toggle);
 		
 		if (savedInstanceState == null) {
-			selectedItem(1);
+			selectedItem(2);
 		}
 	}
 
@@ -172,17 +172,20 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 	
 	private void completeMenu() {
 		menuTitles = new ArrayList<String>();
+		
+		menuTitles.add("nameFacebook");
 		menuTitles.add("Categorias");		
 		
 		drawerAdapter = new DrawerAdapter(this);
 		
 		drawerAdapter.adicionarInformacaoUsuario(nameFacebook, R.drawable.caixa_foto);
-		drawerAdapter.adicionarMenu(menuTitles.get(0));
+		drawerAdapter.adicionarMenu(menuTitles.get(1));	
 		
 		
-		for (int i = 1; i < categorias.size(); i++) {
+		
+		for (int i = 0; i < categorias.size(); i++) {
 			menuTitles.add(categorias.get(i).toString());
-			drawerAdapter.adicionarCategoria(menuTitles.get(i), R.drawable.caixa_foto);
+			drawerAdapter.adicionarCategoria(menuTitles.get(i+2), R.drawable.caixa_foto);
 			
 		}	
 	}
