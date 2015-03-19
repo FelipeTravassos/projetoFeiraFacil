@@ -172,7 +172,7 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		drawerAdapter = new DrawerAdapter(this);
 		
 		DrawerItem infoUser = new DrawerItem(nameFacebook, 0, "informacao_usuario");
-		new DownloadImageFacebook(infoUser, drawerAdapter).execute("https://graph.facebook.com/"+userFacebookId+"/picture?type=large");
+		new DownloadImageFacebook(infoUser, drawerAdapter).execute("https://graph.facebook.com/"+userFacebookId+"/picture?type=normal");
 		drawerAdapter.adicionarInformacaoUsuario(infoUser);
 		drawerAdapter.adicionarMenu(menuTitles.get(1));	
 		

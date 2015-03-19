@@ -159,6 +159,9 @@ public class DrawerAdapter extends BaseAdapter {
 				if (item.getIcon() != 0) {
 					holder.getIcon().setVisibility(View.VISIBLE);
 					holder.getIcon().setImageResource(item.getIcon());
+				} else if (item.getTipo().equals("informacao_usuario")) {
+					holder.getIcon().setVisibility(View.VISIBLE);
+					holder.getIcon().setImageBitmap(item.getImagem());
 				} else {
 					holder.getIcon().setVisibility(View.GONE);
 				}
