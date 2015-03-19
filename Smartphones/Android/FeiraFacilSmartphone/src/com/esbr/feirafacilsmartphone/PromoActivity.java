@@ -1,4 +1,4 @@
-package com.esbr.feirafacilsmartphone;
+	package com.esbr.feirafacilsmartphone;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -6,8 +6,9 @@ import java.util.concurrent.ExecutionException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.experimental.categories.Categories.CategoryFilter;
 
+import com.esbr.feirafacilsmartphone.adapter.DrawerAdapter;
+import com.esbr.feirafacilsmartphone.adapter.DrawerItem;
 import com.esbr.feirafacilsmartphone.adapter.PromoArrayAdapter;
 import com.esbr.feirafacilsmartphone.server.TaskAllCategorias;
 import com.esbr.feirafacilsmartphone.server.TaskAllProdutos;
@@ -23,12 +24,20 @@ import android.content.Intent;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class PromoActivity extends Activity {
+public class PromoActivity extends ActionBarActivity implements ListView.OnItemClickListener{
 
 	private ListView lv;
 	private ArrayList<Produto> values;
@@ -38,22 +47,38 @@ public class PromoActivity extends Activity {
 	private AlertDialog alerta;
 	private String mail;
 	private String name;
+	
+	private DrawerLayout drawer;
+	private ActionBarDrawerToggle toggle;
+	private ListView listView;	
+	private CharSequence drawerTitle;
+	private CharSequence title;	
+	private DrawerAdapter drawerAdapter;
+	private ArrayList<String> menuTitles;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.fragment_promo);
-
-	    getActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		getSupportActionBar().setTitle(R.string.app_name);
+	    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	    getSupportActionBar().setHomeButtonEnabled(true);
+	    
 		
 		lv = (ListView) findViewById(R.id.list_prod_promo);
 		values = new ArrayList<Produto>();
 		categorias = new ArrayList<String>();
 		categoriasSelecionadas = new ArrayList<String>();
 		
+		
+		
 		adapter = new PromoArrayAdapter(this,values);
 		lv.setAdapter(adapter);
+		
+		
 		
 		try {
 			String resultProdutos = new TaskAllProdutos().execute().get();
@@ -87,13 +112,51 @@ public class PromoActivity extends Activity {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		
+		
+		
 		mail = getIntent().getBundleExtra("bundle").getString("email");
 		name =  getIntent().getBundleExtra("bundle").getString("name");
+		
+		drawerTitle = "Menu";
+		completeMenu();
+		listView = (ListView) findViewById(R.id.list_view_drawer);
+		listView.setAdapter(drawerAdapter);
+		listView.setOnItemClickListener(this);
+		
+			
+		
+		drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		
+		
+
+		toggle = new ActionBarDrawerToggle(this, drawer,
+				 R.string.drawer_open,R.string.drawer_close) {
+
+			@Override
+			public void onDrawerClosed(final View view) {
+				getSupportActionBar().setSubtitle(title);
+				supportInvalidateOptionsMenu();
+			}
+
+			@Override
+			public void onDrawerOpened(final View view) {
+				getSupportActionBar().setSubtitle(drawerTitle);
+				supportInvalidateOptionsMenu();
+			}
+		};
+		
+		drawer.setDrawerListener(toggle);
+
+		if (savedInstanceState == null) {
+			selectedItem(1);
+		}
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.promo, menu);
+		
 		return true;
 	}
 
@@ -140,16 +203,16 @@ public class PromoActivity extends Activity {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				ArrayList<Produto> produtosFiltrados = new ArrayList<Produto>();
-				for (Produto produto : values) {
-					if (categoriasSelecionadas.contains(produto.getCategoria())) {
-						produtosFiltrados.add(produto);
+					ArrayList<Produto> produtosFiltrados = new ArrayList<Produto>();
+					for (Produto produto : values) {
+						if (categoriasSelecionadas.contains(produto.getCategoria())) {
+							produtosFiltrados.add(produto);
+						}
 					}
-				}
-				
-				PromoArrayAdapter adapterProdutosFiltrados = new PromoArrayAdapter(PromoActivity.this, produtosFiltrados);
-				lv.setAdapter(adapterProdutosFiltrados);
-				adapterProdutosFiltrados.notifyDataSetChanged();
+					
+					PromoArrayAdapter adapterProdutosFiltrados = new PromoArrayAdapter(PromoActivity.this, produtosFiltrados);
+					lv.setAdapter(adapterProdutosFiltrados);
+					adapterProdutosFiltrados.notifyDataSetChanged();
 				
 			}
 		});
@@ -170,5 +233,62 @@ public class PromoActivity extends Activity {
 		alerta = builder.create();
 		alerta.show();
 	}
+	
+	private void completeMenu() {
+		menuTitles = new ArrayList<String>();
+		menuTitles.add("Categorias");		
+		
+		drawerAdapter = new DrawerAdapter(this);
+		drawerAdapter.addHeader(menuTitles.get(0));
+		
+		
+		for (int i = 1; i < categorias.size(); i++) {
+			menuTitles.add(categorias.get(i).toString());
+			drawerAdapter.addItem(menuTitles.get(i), 1);
+		}	
+		
+		
+	}
+	
+	@Override
+	public final void onItemClick(final AdapterView<?> parent, final View view,
+			final int position, final long id) {
+		selectedItem(position);
+
+	}
+	
+	private void selectedItem(final int position) {
+		
+		DrawerItem item = (DrawerItem)drawerAdapter.getItem(position);
+		String category = item.getTitle();		
+		ArrayList<Produto> produtosFiltrados = getProductCategory(category);		
+		
+		adapter = new PromoArrayAdapter(PromoActivity.this, produtosFiltrados);
+		lv.setAdapter(adapter);
+		adapter.notifyDataSetChanged();		
+		
+		drawerAdapter.resetarCheck();
+		setCustomTitle(menuTitles.get(position));
+		drawerAdapter.setChecked(position, true);
+		drawer.closeDrawer(listView);
+	}
+	
+	private void setCustomTitle(final String newtitle) {
+		this.title = newtitle;
+		getSupportActionBar().setSubtitle(title);
+
+	}
+	
+	private ArrayList<Produto> getProductCategory(String category){
+		ArrayList<Produto> produtosFiltrados = new ArrayList<Produto>();
+		for (Produto produto : values) {
+			if (category.equals(produto.getCategoria())) {
+				produtosFiltrados.add(produto);
+			}
+		}		
+		return produtosFiltrados;
+		
+	}
+	
 	
 }

@@ -28,5 +28,7 @@
     <string name="please_wait">Por favor, espere</string>
     <string name="sucess_order">Pedido realizado com sucesso</string>
     <string name="sending_order">Enviando pedido</string>
+    <string name="drawer_open">Open naigation drawer</string>
+    <string name="drawer_close">Close naigation drawer</string>
 
 </resources>
