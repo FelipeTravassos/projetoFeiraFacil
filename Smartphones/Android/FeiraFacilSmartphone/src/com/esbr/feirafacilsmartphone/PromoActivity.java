@@ -11,9 +11,12 @@ import com.esbr.feirafacilsmartphone.R;
 import com.esbr.feirafacilsmartphone.adapter.DrawerAdapter;
 import com.esbr.feirafacilsmartphone.adapter.DrawerItem;
 import com.esbr.feirafacilsmartphone.adapter.PromoArrayAdapter;
+import com.esbr.feirafacilsmartphone.server.TaskAllCategorias;
 import com.esbr.feirafacilsmartphone.server.TaskAllProdutos;
+import com.esbr.feirafacilsmartphone.supermercado.Categoria;
 import com.esbr.feirafacilsmartphone.supermercado.Produto;
 import com.esbr.feirafacilsmartphone.util.DownloadImage;
+import com.esbr.feirafacilsmartphone.util.DownloadImageCategoria;
 import com.esbr.feirafacilsmartphone.util.DownloadImageFacebook;
 
 import android.app.Activity;
@@ -33,8 +36,8 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 
 	private ListView lv;
 	private ArrayList<Produto> values;
-	private ArrayList<String> categoriasSelecionadas;
-	private ArrayList<String> categorias;
+	private ArrayList<Categoria> categoriasSelecionadas;
+	private ArrayList<Categoria> categorias;
 	private PromoArrayAdapter adapter;
 	private String mailFacebook;
 	private String nameFacebook;
@@ -60,8 +63,8 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		
 		lv = (ListView) findViewById(R.id.list_prod_promo);
 		values = new ArrayList<Produto>();
-		categorias = new ArrayList<String>();
-		categoriasSelecionadas = new ArrayList<String>();		
+		categorias = new ArrayList<Categoria>();
+		categoriasSelecionadas = new ArrayList<Categoria>();		
 		
 		adapter = new PromoArrayAdapter(this,values);
 		lv.setAdapter(adapter);
@@ -78,18 +81,28 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		       	float valorUnitarioProduto = Float.parseFloat(jsonObj.get("preco").toString());
 		       	String categoriaProduto = jsonObj.get("categoria").toString();
 		       	String imagemLink = jsonObj.get("imagemLink").toString();
-		       	
-		       	if (!categorias.contains(categoriaProduto)) {
-		       		categorias.add(categoriaProduto);
-		       		categoriasSelecionadas.add(categoriaProduto);
-		       	}
-		       	
+		       		       	
 		       	Produto produto = new Produto(id, nomeProduto, descricaoProduto, valorUnitarioProduto, categoriaProduto, 0, imagemLink);
 		       	
 		       	new DownloadImage(produto, adapter).execute(imagemLink).get();
 		       	
 		       	values.add(produto);
 		    }
+			
+			
+			String resultCategorias = new TaskAllCategorias().execute().get();
+			JSONArray jsonCategorias = new JSONArray(resultCategorias);
+			for (int i = 0; i < jsonCategorias.length(); i++) {
+		       	JSONObject jsonObj = jsonCategorias.getJSONObject(i);
+		       	
+		       	String nomeCategoria = jsonObj.get("nome").toString();
+		       	String imagemLink = jsonObj.get("imagemLink").toString();
+		       	
+		       	Categoria categoria = new Categoria(nomeCategoria, imagemLink);
+		       	
+		       	categorias.add(categoria);
+		       	categoriasSelecionadas.add(categoria);
+			}
 			
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
@@ -172,14 +185,17 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		
 		drawerAdapter.adicionarMenu("Categorias");
 		for (int i = 0; i < categorias.size(); i++) {
-			drawerAdapter.adicionarCategoria(categorias.get(i).toString(), R.drawable.caixa_foto);
+			
+			DrawerItem categoria = new DrawerItem(categorias.get(i).getNomeCategoria(), 0, "categoria");
+			
+			new DownloadImageCategoria(categoria, drawerAdapter).execute(categorias.get(i).getImagemLinkCategoria());
+			drawerAdapter.adicionarCategoria(categoria);
 		}
 		
 		drawerAdapter.adicionarMenu("Pedidos");
-		drawerAdapter.adicionarCategoria("Solicitados", R.drawable.ic_checked_itens);
-		drawerAdapter.adicionarCategoria("Concluídos", R.drawable.icone_confirmarfeiraselecionado);
+		//drawerAdapter.adicionarCategoria("Solicitados", R.drawable.ic_timer_orange);
+		//drawerAdapter.adicionarCategoria("Concluídos", R.drawable.ic_done_orange);
 		
-		drawerAdapter.adicionarMenu("Minhas Listas");
 	}
 	
 	@Override
@@ -194,7 +210,16 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		DrawerItem item = (DrawerItem)drawerAdapter.getItem(position);
 		String titleMenu = item.getTitle();		
 		
-		if (categorias.contains(titleMenu)) {
+		drawerAdapter.resetarCheck();
+		boolean selectedCategoria = false;
+		for (Categoria categoria : categorias) {
+			if (categoria.getNomeCategoria().equalsIgnoreCase(titleMenu)) {
+				selectedCategoria = true;
+				break;
+			}
+		}
+		
+		if (selectedCategoria) {
 			
 			ArrayList<Produto> produtosFiltrados = getProductCategory(titleMenu);		
 			
@@ -210,7 +235,7 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 			getActionBar().setSubtitle("Pedidos");
 		}
 		
-		drawerAdapter.resetarCheck();
+		;
 		drawerAdapter.setChecked(position, true);
 		drawer.closeDrawer(listView);
 	}

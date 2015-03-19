@@ -4,10 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-     
     tools:context="com.esbr.feirafacilsmartphone.PromoActivity$PlaceholderFragment" >
 
-   // <include layout="@layout/list_promo"/>
+	<include layout="@layout/list_promo"/>
     
     <ListView
         android:id="@+id/list_view_drawer"

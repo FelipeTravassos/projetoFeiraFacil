@@ -34,8 +34,8 @@ public class DrawerAdapter extends BaseAdapter {
 		this.checkedItems = new HashSet<Integer>();
 	}
 
-	public void adicionarCategoria(final String title, final int icon) {
-		itemDrawer.add(new DrawerItem(title, icon, "categoria"));
+	public void adicionarCategoria(DrawerItem categoria) {
+		itemDrawer.add(categoria);
 	}
 
 	public final void adicionarMenu(final String title) {
@@ -125,7 +125,9 @@ public class DrawerAdapter extends BaseAdapter {
 				layout = R.layout.header;	
 				
 				view = LayoutInflater.from(context).inflate(layout, null);
+				
 				icon = (ImageView) view.findViewById(R.id.icon);
+				icon.setImageBitmap(item.getImagem());
 				
 			} else if (item.getTipo().equals("categoria")) {
 				
@@ -157,9 +159,15 @@ public class DrawerAdapter extends BaseAdapter {
 				if (item.getIcon() != 0) {
 					holder.getIcon().setVisibility(View.VISIBLE);
 					holder.getIcon().setImageResource(item.getIcon());
+					
 				} else if (item.getTipo().equals("informacao_usuario")) {
 					holder.getIcon().setVisibility(View.VISIBLE);
 					holder.getIcon().setImageBitmap(item.getImagem());
+					
+				} else if (item.getTipo().equals("categoria")) {
+					holder.getIcon().setVisibility(View.VISIBLE);
+					holder.getIcon().setImageBitmap(item.getImagem());
+					
 				} else {
 					holder.getIcon().setVisibility(View.GONE);
 				}
