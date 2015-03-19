@@ -1,18 +1,19 @@
 package com.esbr.feirafacilsmartphone.adapter;
 
 public class DrawerItem {
+	
 	private String title;
     private int icon;
-    private boolean isHead;
+    private String tipo;
 
     public DrawerItem() {
     }
 
     public DrawerItem(
-        final String title, final int icon, final boolean isHead) {
+        final String title, final int icon, final String tipo) {
         this.title = title;
         this.icon = icon;
-        this.isHead = isHead;
+        this.tipo = tipo;
     }
 
     public final String getTitle() {
@@ -31,11 +32,11 @@ public class DrawerItem {
         this.icon = icon;
     }
 
-    public boolean getIsHead() {
-        return this.isHead;
+    public String getTipo() {
+        return this.tipo;
     }
 
-    public void setIsHead(boolean head) {
-        this.isHead = head;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

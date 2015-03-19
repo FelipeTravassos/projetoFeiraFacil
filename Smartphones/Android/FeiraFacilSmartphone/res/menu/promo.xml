@@ -2,12 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" >
-    
-    <!-- Selecionar Filtro-->
-	<item android:id="@+id/selecionarFiltroCarrinho"
-          android:icon="@drawable/ic_selecionar_filtro"
-          android:title="@string/title_activity_carrinho" 
-          android:showAsAction="ifRoom" />
        
     <!-- Vizualiar Carrinho -->
     <item android:id="@+id/vizualizarCarrinho"

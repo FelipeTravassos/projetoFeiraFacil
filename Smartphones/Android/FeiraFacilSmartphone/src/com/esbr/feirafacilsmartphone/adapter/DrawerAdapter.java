@@ -34,15 +34,17 @@ public class DrawerAdapter extends BaseAdapter{
 		this.checkedItems = new HashSet<Integer>();
 	}
 
-	public void addItem(final String title, final int icon) {
-		itemDrawer.add(new DrawerItem(title, icon, false));
-
+	public void adicionarCategoria(final String title, final int icon) {
+		itemDrawer.add(new DrawerItem(title, icon, "categoria"));
 	}
 
-	public final void addHeader(final String title) {
-		itemDrawer.add(new DrawerItem(title, 0, true));
+	public final void adicionarMenu(final String title) {
+		itemDrawer.add(new DrawerItem(title, 0, "menu"));
 		separatorsSet.add(itemDrawer.size() - 1);
-
+	}
+	
+	public final void adicionarInformacaoUsuario(final String title, final int icon) {
+		itemDrawer.add(new DrawerItem(title, icon, "informacao_usuario"));
 	}
 
 	@Override
@@ -93,17 +95,27 @@ public class DrawerAdapter extends BaseAdapter{
 
 	
 	@Override
-	public final View getView(final int position, final View convertView,
-			final ViewGroup parent) {
+	public final View getView(final int position, final View convertView, final ViewGroup parent) {
 		holder = null;
 		View view = convertView;
 		DrawerItem item = itemDrawer.get(position);
 
 		if (view == null) {
+
 			int layout = 0;
-			layout = R.layout.drawer_list_item;
-			if (item.getIsHead()) {
-				layout = R.layout.header;
+			
+			if (item.getTipo().equals("informacao_usuario")) {
+				
+				layout = R.layout.informacao_usuario;
+				
+			} else if (item.getTipo().equals("menu")) {
+				
+				layout = R.layout.header;	
+				
+			} else if (item.getTipo().equals("categoria")) {
+				
+				layout = R.layout.drawer_list_item;
+				
 			}
 
 			view = LayoutInflater.from(context).inflate(layout, null);
@@ -111,9 +123,8 @@ public class DrawerAdapter extends BaseAdapter{
 			TextView title = (TextView) view.findViewById(R.id.title);
 			ImageView icon = (ImageView) view.findViewById(R.id.icon);
 			View viewNavigation = view.findViewById(R.id.viewNavigation);
-
-			LinearLayout linearColor = (LinearLayout) view
-					.findViewById(R.id.ns_menu_row);
+			
+			LinearLayout linearColor = (LinearLayout) view.findViewById(R.id.ns_menu_row);
 			view.setTag(new ViewHolder(title, icon, linearColor, viewNavigation));
 
 		}
@@ -138,7 +149,7 @@ public class DrawerAdapter extends BaseAdapter{
 			}
 		}
 
-		if (item != null && !item.getIsHead()) {
+		if (item != null && !item.getTipo().equals("menu")) {
 			if (checkedItems.contains(Integer.valueOf(position))) {
 				holder.getViewNavigation().setVisibility(View.VISIBLE);
 			} else {

@@ -3,4 +3,6 @@
     <color name="background_main">#00483F</color>
     <color name="text_black">#000000</color>
     <color name="gray">#E5E5E5</color>
+    <color name="cyan">#009999</color>
+    <color name="whitesnow">#F8F8FF</color>
 </resources>

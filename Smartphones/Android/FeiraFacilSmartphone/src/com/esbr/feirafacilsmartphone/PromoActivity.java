@@ -75,8 +75,6 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		adapter = new PromoArrayAdapter(this,values);
 		lv.setAdapter(adapter);
 		
-		
-		
 		try {
 			String resultProdutos = new TaskAllProdutos().execute().get();
 			JSONArray jsonProdutos = new JSONArray(resultProdutos);
@@ -121,12 +119,8 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		listView.setAdapter(drawerAdapter);
 		listView.setOnItemClickListener(this);
 		
-			
-		
 		drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		
-		
-
 		toggle = new ActionBarDrawerToggle(this, drawer,R.drawable.ic_drawer,
 				 R.string.drawer_open,R.string.drawer_close) {
 
@@ -170,65 +164,10 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 				myIntent.putExtra("nome", name);
 				startActivity(myIntent);
 				return true;
-				
-			case R.id.selecionarFiltroCarrinho:
-				selecionarFiltro();
-				return true;
-				
+
 			default:
 				return super.onOptionsItemSelected(item);
 		}
-	}
-
-	
-	private void selecionarFiltro() {
-		
-		final String[] items = categorias.toArray(new String[categorias.size()]);
-		boolean [] selected = new boolean[categorias.size()];
-		
-		for (int i = 0; i < categorias.size(); i++) {
-			if (categoriasSelecionadas.contains(items[i])) {
-				selected[i] = true;
-			} else {
-				selected[i] = false;
-			}
-			
-		}
-		android.app.AlertDialog.Builder builder = new AlertDialog.Builder(PromoActivity.this);
-		builder.setCancelable(false);
-		builder.setPositiveButton("Selecionar", new OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-					ArrayList<Produto> produtosFiltrados = new ArrayList<Produto>();
-					for (Produto produto : values) {
-						if (categoriasSelecionadas.contains(produto.getCategoria())) {
-							produtosFiltrados.add(produto);
-						}
-					}
-					
-					PromoArrayAdapter adapterProdutosFiltrados = new PromoArrayAdapter(PromoActivity.this, produtosFiltrados);
-					lv.setAdapter(adapterProdutosFiltrados);
-					adapterProdutosFiltrados.notifyDataSetChanged();
-				
-			}
-		});
-		
-		builder.setTitle("Exibir produtos por categoria").setMultiChoiceItems(items, selected, new OnMultiChoiceClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-				String categoria = items[which];
-				if (isChecked) {
-					categoriasSelecionadas.add(categoria);
-				} else {
-					categoriasSelecionadas.remove(categoria);
-				}
-				
-			}
-		});
-		alerta = builder.create();
-		alerta.show();
 	}
 	
 	private void completeMenu() {
@@ -236,15 +175,16 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		menuTitles.add("Categorias");		
 		
 		drawerAdapter = new DrawerAdapter(this);
-		drawerAdapter.addHeader(menuTitles.get(0));
+		
+		//drawerAdapter.adicionarInformacaoUsuario("Gilles Medeiros Henriques", R.drawable.caixa_foto);
+		drawerAdapter.adicionarMenu(menuTitles.get(0));
 		
 		
 		for (int i = 1; i < categorias.size(); i++) {
 			menuTitles.add(categorias.get(i).toString());
-			drawerAdapter.addItem(menuTitles.get(i), 1);
+			drawerAdapter.adicionarCategoria(menuTitles.get(i), R.drawable.caixa_foto);
+			
 		}	
-		
-		
 	}
 	
 	@Override
