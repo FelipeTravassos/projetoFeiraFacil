@@ -168,7 +168,7 @@ public class DrawerAdapter extends BaseAdapter {
 
 		if (item != null && !item.getTipo().equals("menu") && !item.getTipo().equals("informacao_usuario")) {
 			if (checkedItems.contains(Integer.valueOf(position))) {
-				view.setBackgroundColor(context.getResources().getColor(R.color.cyan));
+				view.setBackgroundColor(context.getResources().getColor(R.color.gray_selected));
 				
 			} else {
 				view.setBackgroundColor(context.getResources().getColor(R.color.white));

@@ -17,6 +17,7 @@ import com.esbr.feirafacilsmartphone.util.DownloadImage;
 import com.esbr.feirafacilsmartphone.util.DownloadImageFacebook;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -45,7 +46,6 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 	private CharSequence drawerTitle;
 	private CharSequence title;	
 	private DrawerAdapter drawerAdapter;
-	private ArrayList<String> menuTitles;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -162,26 +162,24 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 	}
 	
 	private void completeMenu() {
-		menuTitles = new ArrayList<String>();
-		
-		menuTitles.add("nameFacebook");
-		menuTitles.add("Categorias");	
-		menuTitles.add("Pedidos");
 		
 		drawerAdapter = new DrawerAdapter(this);
 		
 		DrawerItem infoUser = new DrawerItem(nameFacebook, 0, "informacao_usuario");
 		new DownloadImageFacebook(infoUser, drawerAdapter).execute("https://graph.facebook.com/"+userFacebookId+"/picture?type=normal");
+	
 		drawerAdapter.adicionarInformacaoUsuario(infoUser);
-		drawerAdapter.adicionarMenu(menuTitles.get(1));	
 		
+		drawerAdapter.adicionarMenu("Categorias");
 		for (int i = 0; i < categorias.size(); i++) {
-			menuTitles.add(categorias.get(i).toString());
-			drawerAdapter.adicionarCategoria(menuTitles.get(i+3), R.drawable.caixa_foto);
-			
-		}	
+			drawerAdapter.adicionarCategoria(categorias.get(i).toString(), R.drawable.caixa_foto);
+		}
 		
-		drawerAdapter.adicionarMenu(menuTitles.get(2));
+		drawerAdapter.adicionarMenu("Pedidos");
+		drawerAdapter.adicionarCategoria("Solicitados", R.drawable.ic_checked_itens);
+		drawerAdapter.adicionarCategoria("Concluídos", R.drawable.icone_confirmarfeiraselecionado);
+		
+		drawerAdapter.adicionarMenu("Minhas Listas");
 	}
 	
 	@Override
@@ -194,24 +192,29 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 	private void selectedItem(final int position) {
 		
 		DrawerItem item = (DrawerItem)drawerAdapter.getItem(position);
-		String category = item.getTitle();		
-		ArrayList<Produto> produtosFiltrados = getProductCategory(category);		
+		String titleMenu = item.getTitle();		
 		
-		adapter = new PromoArrayAdapter(PromoActivity.this, produtosFiltrados);
-		lv.setAdapter(adapter);
-		adapter.notifyDataSetChanged();		
+		if (categorias.contains(titleMenu)) {
+			
+			ArrayList<Produto> produtosFiltrados = getProductCategory(titleMenu);		
+			
+			adapter = new PromoArrayAdapter(PromoActivity.this, produtosFiltrados);
+			lv.setAdapter(adapter);
+			adapter.notifyDataSetChanged();		
+			
+			getActionBar().setTitle(titleMenu);
+			getActionBar().setSubtitle("Categorias");
+			
+		} else if (titleMenu.equalsIgnoreCase("Solicitados") || titleMenu.equalsIgnoreCase("Concluídos")) {
+			getActionBar().setTitle(titleMenu);
+			getActionBar().setSubtitle("Pedidos");
+		}
 		
 		drawerAdapter.resetarCheck();
-		setCustomTitle(menuTitles.get(position));
 		drawerAdapter.setChecked(position, true);
 		drawer.closeDrawer(listView);
 	}
 	
-	private void setCustomTitle(final String newtitle) {
-		this.title = newtitle;
-		getActionBar().setSubtitle(title);
-
-	}
 	
 	private ArrayList<Produto> getProductCategory(String category){
 		ArrayList<Produto> produtosFiltrados = new ArrayList<Produto>();
