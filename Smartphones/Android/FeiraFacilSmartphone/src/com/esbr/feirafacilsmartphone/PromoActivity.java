@@ -166,6 +166,9 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 				return true;
 
 			default:
+				if (toggle.onOptionsItemSelected(item)) {
+					return true;
+				}
 				return super.onOptionsItemSelected(item);
 		}
 	}
