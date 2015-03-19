@@ -20,7 +20,6 @@ import com.esbr.feirafacilsmartphone.util.DownloadImageCategoria;
 import com.esbr.feirafacilsmartphone.util.DownloadImageFacebook;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -70,6 +69,21 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		lv.setAdapter(adapter);
 		
 		try {
+			String resultCategorias = new TaskAllCategorias().execute().get();
+			JSONArray jsonCategorias = new JSONArray(resultCategorias);
+			for (int i = 0; i < jsonCategorias.length(); i++) {
+				JSONObject jsonObj = jsonCategorias.getJSONObject(i);
+				
+				String nomeCategoria = jsonObj.get("nome").toString();
+				String imagemLink = jsonObj.get("imagemLink").toString();
+				
+				Categoria categoria = new Categoria(nomeCategoria, imagemLink);
+				
+				categorias.add(categoria);
+				categoriasSelecionadas.add(categoria);
+			}
+			
+			
 			String resultProdutos = new TaskAllProdutos().execute().get();
 			JSONArray jsonProdutos = new JSONArray(resultProdutos);
 			for (int i = 0; i < jsonProdutos.length(); i++) {
@@ -79,9 +93,17 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		       	String nomeProduto = jsonObj.get("nome").toString();
 		       	String descricaoProduto = jsonObj.get("descricao").toString();
 		       	float valorUnitarioProduto = Float.parseFloat(jsonObj.get("preco").toString());
-		       	String categoriaProduto = jsonObj.get("categoria").toString();
+		       	String categoriaDoProduto = jsonObj.get("categoria").toString();
 		       	String imagemLink = jsonObj.get("imagemLink").toString();
-		       		       	
+		       		    
+		       	Categoria categoriaProduto = null;
+		       	for (Categoria categoria : categorias) {
+					if (categoria.getNomeCategoria().equalsIgnoreCase(categoriaDoProduto)) {
+						categoriaProduto = categoria;
+						categoriaProduto.addQuantidadeItem();
+						break;
+					}
+				}
 		       	Produto produto = new Produto(id, nomeProduto, descricaoProduto, valorUnitarioProduto, categoriaProduto, 0, imagemLink);
 		       	
 		       	new DownloadImage(produto, adapter).execute(imagemLink).get();
@@ -89,20 +111,6 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		       	values.add(produto);
 		    }
 			
-			
-			String resultCategorias = new TaskAllCategorias().execute().get();
-			JSONArray jsonCategorias = new JSONArray(resultCategorias);
-			for (int i = 0; i < jsonCategorias.length(); i++) {
-		       	JSONObject jsonObj = jsonCategorias.getJSONObject(i);
-		       	
-		       	String nomeCategoria = jsonObj.get("nome").toString();
-		       	String imagemLink = jsonObj.get("imagemLink").toString();
-		       	
-		       	Categoria categoria = new Categoria(nomeCategoria, imagemLink);
-		       	
-		       	categorias.add(categoria);
-		       	categoriasSelecionadas.add(categoria);
-			}
 			
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
@@ -193,8 +201,9 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		}
 
 		drawerAdapter.adicionarMenu("Pedidos");
-		//drawerAdapter.adicionarCategoria("Solicitados", R.drawable.ic_timer_orange);
-		//drawerAdapter.adicionarCategoria("Concluídos", R.drawable.ic_done_orange);
+		
+		drawerAdapter.adicionarCategoria(new DrawerItem("Solicitados", R.drawable.ic_timer_orange, "categoria"));
+		drawerAdapter.adicionarCategoria(new DrawerItem("Finalizados", R.drawable.ic_done_orange, "categoria"));
 		
 	}
 	
@@ -210,7 +219,7 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		DrawerItem item = (DrawerItem)drawerAdapter.getItem(position);
 		String titleMenu = item.getTitle();		
 		
-		drawerAdapter.resetarCheck();
+	
 		boolean selectedCategoria = false;
 		for (Categoria categoria : categorias) {
 			if (categoria.getNomeCategoria().equalsIgnoreCase(titleMenu)) {
@@ -226,11 +235,12 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 			adapter = new PromoArrayAdapter(PromoActivity.this, produtosFiltrados);
 			lv.setAdapter(adapter);
 			adapter.notifyDataSetChanged();		
-			
+			drawerAdapter.resetarCheck();
 			getActionBar().setTitle(titleMenu);
 			getActionBar().setSubtitle("Categorias");
 			
 		} else if (titleMenu.equalsIgnoreCase("Solicitados") || titleMenu.equalsIgnoreCase("Concluídos")) {
+			drawerAdapter.resetarCheck();
 			getActionBar().setTitle(titleMenu);
 			getActionBar().setSubtitle("Pedidos");
 		}
@@ -244,7 +254,7 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 	private ArrayList<Produto> getProductCategory(String category){
 		ArrayList<Produto> produtosFiltrados = new ArrayList<Produto>();
 		for (Produto produto : values) {
-			if (category.equals(produto.getCategoria())) {
+			if (category.equals(produto.getCategoria().getNomeCategoria())) {
 				produtosFiltrados.add(produto);
 			}
 		}		

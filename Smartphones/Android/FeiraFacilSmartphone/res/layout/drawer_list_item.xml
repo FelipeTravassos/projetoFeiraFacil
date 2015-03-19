@@ -12,12 +12,12 @@
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="25dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
             />
 
         <TextView
@@ -27,7 +27,8 @@
             android:layout_toRightOf="@id/icon"
             android:gravity="center_vertical"
             android:minHeight="?android:attr/listPreferredItemHeight"
-            android:textAppearance="@android:style/TextAppearance.Small"
+            android:choiceMode="singleChoice"
+            android:textSize="15dp"
             android:textColor="@color/background_main" />
 
     </RelativeLayout>

@@ -7,11 +7,13 @@ public class Categoria {
 	private String nomeCategoria;
 	private String imagemLinkCategoria;
 	private Bitmap imagemCategoria;
+	private int quantidadeItems;
 	
 	public Categoria(String nomeCategoria, String imagemLinkCategoria) {
 		setNomeCategoria(nomeCategoria);
 		setImagemLinkCategoria(imagemLinkCategoria);
 		setImagemCategoria(null);
+		setQuantidadeItems(0);
 	}
 	
 	public String getNomeCategoria() {
@@ -43,4 +45,15 @@ public class Categoria {
 		this.imagemCategoria = imagemCategoria;
 	}
 
+	public int getQuantidadeItems() {
+		return quantidadeItems;
+	}
+
+	public void setQuantidadeItems(int quantidadeItems) {
+		this.quantidadeItems = quantidadeItems;
+	}
+
+	public void addQuantidadeItem() {
+		quantidadeItems += 1;
+	}
 }
