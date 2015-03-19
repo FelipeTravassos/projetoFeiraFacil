@@ -45,8 +45,8 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 	private ArrayList<String> categorias;
 	private PromoArrayAdapter adapter;
 	private AlertDialog alerta;
-	private String mail;
-	private String name;
+	private String mailFacebook;
+	private String nameFacebook;
 	
 	private DrawerLayout drawer;
 	private ActionBarDrawerToggle toggle;
@@ -110,8 +110,8 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		
 		
 		
-		mail = getIntent().getBundleExtra("bundle").getString("email");
-		name =  getIntent().getBundleExtra("bundle").getString("name");
+		mailFacebook = getIntent().getBundleExtra("bundle").getString("email");
+		nameFacebook =  getIntent().getBundleExtra("bundle").getString("name");
 		
 		drawerTitle = "Menu";
 		completeMenu();
@@ -160,8 +160,8 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		
 			case R.id.vizualizarCarrinho:
 				Intent myIntent = new Intent(getBaseContext(), CarrinhoActivity.class);
-				myIntent.putExtra("email", mail);
-				myIntent.putExtra("nome", name);
+				myIntent.putExtra("email", mailFacebook);
+				myIntent.putExtra("nome", nameFacebook);
 				startActivity(myIntent);
 				return true;
 
@@ -176,7 +176,7 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		
 		drawerAdapter = new DrawerAdapter(this);
 		
-		drawerAdapter.adicionarInformacaoUsuario("Gilles Medeiros Henriques", R.drawable.caixa_foto);
+		drawerAdapter.adicionarInformacaoUsuario(nameFacebook, R.drawable.caixa_foto);
 		drawerAdapter.adicionarMenu(menuTitles.get(0));
 		
 		
