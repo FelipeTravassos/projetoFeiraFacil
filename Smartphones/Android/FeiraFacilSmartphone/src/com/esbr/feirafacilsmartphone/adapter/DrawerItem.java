@@ -1,10 +1,13 @@
 package com.esbr.feirafacilsmartphone.adapter;
 
+import android.graphics.Bitmap;
+
 public class DrawerItem {
 	
 	private String title;
     private int icon;
     private String tipo;
+	private Bitmap imagem;
 
     public DrawerItem() {
     }
@@ -14,6 +17,7 @@ public class DrawerItem {
         this.title = title;
         this.icon = icon;
         this.tipo = tipo;
+        this.setImagem(null);
     }
 
     public final String getTitle() {
@@ -39,4 +43,12 @@ public class DrawerItem {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+	public Bitmap getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(Bitmap image) {
+		this.imagem = imagem;
+	}
 }

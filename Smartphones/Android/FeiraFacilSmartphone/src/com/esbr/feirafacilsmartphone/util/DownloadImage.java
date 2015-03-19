@@ -9,8 +9,6 @@ import java.io.InputStream;
 import com.esbr.feirafacilsmartphone.adapter.PromoArrayAdapter;
 import com.esbr.feirafacilsmartphone.supermercado.Produto;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;

@@ -100,8 +100,9 @@ public class LoginActivity extends Activity {
 					if(user!=null){
 						Intent myIntent = new Intent(getBaseContext(), PromoActivity.class);
 						Bundle bundle = new Bundle();
-						bundle.putCharSequence("name", user.getName());
-						bundle.putCharSequence("email", user.getProperty("email").toString());
+						bundle.putCharSequence("nameFacebook", user.getName());
+						bundle.putCharSequence("emailFacebook", user.getProperty("email").toString());
+						bundle.putCharSequence("userFacebookId", user.getId());
 						myIntent.putExtra("bundle", bundle);
 			        	startActivity(myIntent);
 			        	finish();

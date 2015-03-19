@@ -43,8 +43,8 @@ public class DrawerAdapter extends BaseAdapter{
 		separatorsSet.add(itemDrawer.size() - 1);
 	}
 	
-	public final void adicionarInformacaoUsuario(final String title, final int icon) {
-		itemDrawer.add(new DrawerItem(title, icon, "informacao_usuario"));
+	public final void adicionarInformacaoUsuario(DrawerItem infoUser) {
+		itemDrawer.add(infoUser);
 		separatorsSet.add(itemDrawer.size() - 1);
 	}
 
@@ -104,28 +104,45 @@ public class DrawerAdapter extends BaseAdapter{
 		if (view == null) {
 
 			int layout = 0;
+			View viewNavigation = null;
+
+			TextView title = null;
+			ImageView icon = null;
+			LinearLayout linearColor = null;
 			
 			if (item.getTipo().equals("informacao_usuario")) {
 				
 				layout = R.layout.informacao_usuario;
 				
+				view = LayoutInflater.from(context).inflate(layout, null);
+				
+				
+				icon = (ImageView) view.findViewById(R.id.icon);
+				if (item.getImagem() != null) {
+					icon.setImageBitmap(item.getImagem());
+				}
+				
+				
 			} else if (item.getTipo().equals("menu")) {
 				
 				layout = R.layout.header;	
+				
+				view = LayoutInflater.from(context).inflate(layout, null);
+				icon = (ImageView) view.findViewById(R.id.icon);
 				
 			} else if (item.getTipo().equals("categoria")) {
 				
 				layout = R.layout.drawer_list_item;
 				
+				view = LayoutInflater.from(context).inflate(layout, null);
+				icon = (ImageView) view.findViewById(R.id.icon);
 			}
 
-			view = LayoutInflater.from(context).inflate(layout, null);
-
-			TextView title = (TextView) view.findViewById(R.id.title);
-			ImageView icon = (ImageView) view.findViewById(R.id.icon);
-			View viewNavigation = view.findViewById(R.id.viewNavigation);
 			
-			LinearLayout linearColor = (LinearLayout) view.findViewById(R.id.ns_menu_row);
+			title = (TextView) view.findViewById(R.id.title);
+			viewNavigation = view.findViewById(R.id.viewNavigation);
+			linearColor = (LinearLayout) view.findViewById(R.id.ns_menu_row);
+
 			view.setTag(new ViewHolder(title, icon, linearColor, viewNavigation));
 
 		}
@@ -160,4 +177,5 @@ public class DrawerAdapter extends BaseAdapter{
 
 		return view;
 	}
+	
 }
