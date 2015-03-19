@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.esbr.feirafacilsmartphone.R;
 import com.esbr.feirafacilsmartphone.adapter.DrawerAdapter;
 import com.esbr.feirafacilsmartphone.adapter.DrawerItem;
 import com.esbr.feirafacilsmartphone.adapter.PromoArrayAdapter;
@@ -28,8 +29,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +37,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class PromoActivity extends ActionBarActivity implements ListView.OnItemClickListener{
+public class PromoActivity extends Activity implements ListView.OnItemClickListener{
 
 	private ListView lv;
 	private ArrayList<Produto> values;
@@ -63,17 +63,14 @@ public class PromoActivity extends ActionBarActivity implements ListView.OnItemC
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.fragment_promo);
 		
-		getSupportActionBar().setTitle(R.string.app_name);
-	    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-	    getSupportActionBar().setHomeButtonEnabled(true);
-	    
+		getActionBar().setTitle(R.string.app_name);
+	    getActionBar().setDisplayHomeAsUpEnabled(true);
+	    getActionBar().setHomeButtonEnabled(true);	    
 		
 		lv = (ListView) findViewById(R.id.list_prod_promo);
 		values = new ArrayList<Produto>();
 		categorias = new ArrayList<String>();
-		categoriasSelecionadas = new ArrayList<String>();
-		
-		
+		categoriasSelecionadas = new ArrayList<String>();		
 		
 		adapter = new PromoArrayAdapter(this,values);
 		lv.setAdapter(adapter);
@@ -130,24 +127,24 @@ public class PromoActivity extends ActionBarActivity implements ListView.OnItemC
 		
 		
 
-		toggle = new ActionBarDrawerToggle(this, drawer,
+		toggle = new ActionBarDrawerToggle(this, drawer,R.drawable.ic_drawer,
 				 R.string.drawer_open,R.string.drawer_close) {
 
 			@Override
 			public void onDrawerClosed(final View view) {
-				getSupportActionBar().setSubtitle(title);
-				supportInvalidateOptionsMenu();
+				getActionBar().setSubtitle(title);
+				invalidateOptionsMenu();
 			}
 
 			@Override
 			public void onDrawerOpened(final View view) {
-				getSupportActionBar().setSubtitle(drawerTitle);
-				supportInvalidateOptionsMenu();
+				getActionBar().setSubtitle(drawerTitle);
+				invalidateOptionsMenu();
 			}
 		};
 		
 		drawer.setDrawerListener(toggle);
-
+		
 		if (savedInstanceState == null) {
 			selectedItem(1);
 		}
@@ -275,7 +272,7 @@ public class PromoActivity extends ActionBarActivity implements ListView.OnItemC
 	
 	private void setCustomTitle(final String newtitle) {
 		this.title = newtitle;
-		getSupportActionBar().setSubtitle(title);
+		getActionBar().setSubtitle(title);
 
 	}
 	

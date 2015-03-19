@@ -13,6 +13,6 @@
     <item android:id="@+id/vizualizarCarrinho"
           android:icon="@drawable/ic_finalizarfeira"
           android:title="@string/title_activity_carrinho" 
-          app:showAsAction="always" />
+          android:showAsAction="always" />
    
 </menu>
