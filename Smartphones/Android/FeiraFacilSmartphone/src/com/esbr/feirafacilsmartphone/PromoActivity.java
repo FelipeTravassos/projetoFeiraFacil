@@ -1,4 +1,4 @@
-	package com.esbr.feirafacilsmartphone;
+package com.esbr.feirafacilsmartphone;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -11,23 +11,15 @@ import com.esbr.feirafacilsmartphone.R;
 import com.esbr.feirafacilsmartphone.adapter.DrawerAdapter;
 import com.esbr.feirafacilsmartphone.adapter.DrawerItem;
 import com.esbr.feirafacilsmartphone.adapter.PromoArrayAdapter;
-import com.esbr.feirafacilsmartphone.server.TaskAllCategorias;
 import com.esbr.feirafacilsmartphone.server.TaskAllProdutos;
-import com.esbr.feirafacilsmartphone.supermercado.Carrinho;
 import com.esbr.feirafacilsmartphone.supermercado.Produto;
 import com.esbr.feirafacilsmartphone.util.DownloadImage;
+import com.esbr.feirafacilsmartphone.util.DownloadImageFacebook;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.view.Menu;
@@ -35,7 +27,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class PromoActivity extends Activity implements ListView.OnItemClickListener{
 
@@ -44,9 +35,9 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 	private ArrayList<String> categoriasSelecionadas;
 	private ArrayList<String> categorias;
 	private PromoArrayAdapter adapter;
-	private AlertDialog alerta;
 	private String mailFacebook;
 	private String nameFacebook;
+	private String userFacebookId;
 	
 	private DrawerLayout drawer;
 	private ActionBarDrawerToggle toggle;
@@ -108,10 +99,9 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 			e.printStackTrace();
 		}
 		
-		
-		
-		mailFacebook = getIntent().getBundleExtra("bundle").getString("email");
-		nameFacebook =  getIntent().getBundleExtra("bundle").getString("name");
+		mailFacebook = getIntent().getBundleExtra("bundle").getString("emailFacebook");
+		nameFacebook =  getIntent().getBundleExtra("bundle").getString("nameFacebook");
+		userFacebookId = getIntent().getBundleExtra("bundle").getString("userFacebookId");
 		
 		drawerTitle = "Menu";
 		completeMenu();
@@ -181,10 +171,10 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		
 		drawerAdapter = new DrawerAdapter(this);
 		
-		drawerAdapter.adicionarInformacaoUsuario(nameFacebook, R.drawable.caixa_foto);
+		DrawerItem infoUser = new DrawerItem(nameFacebook, 0, "informacao_usuario");
+		new DownloadImageFacebook(infoUser, drawerAdapter).execute("https://graph.facebook.com/"+userFacebookId+"/picture?type=large");
+		drawerAdapter.adicionarInformacaoUsuario(infoUser);
 		drawerAdapter.adicionarMenu(menuTitles.get(1));	
-		
-		
 		
 		for (int i = 0; i < categorias.size(); i++) {
 			menuTitles.add(categorias.get(i).toString());
@@ -232,6 +222,5 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		return produtosFiltrados;
 		
 	}
-	
 	
 }
