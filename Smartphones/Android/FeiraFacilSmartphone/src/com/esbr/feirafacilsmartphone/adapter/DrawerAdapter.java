@@ -127,14 +127,15 @@ public class DrawerAdapter extends BaseAdapter {
 				view = LayoutInflater.from(context).inflate(layout, null);
 				
 				icon = (ImageView) view.findViewById(R.id.icon);
-				icon.setImageBitmap(item.getImagem());
 				
 			} else if (item.getTipo().equals("categoria")) {
 				
 				layout = R.layout.drawer_list_item;
 				
 				view = LayoutInflater.from(context).inflate(layout, null);
+
 				icon = (ImageView) view.findViewById(R.id.icon);
+				icon.setImageBitmap(item.getImagem());
 			}
 
 			
@@ -160,11 +161,7 @@ public class DrawerAdapter extends BaseAdapter {
 					holder.getIcon().setVisibility(View.VISIBLE);
 					holder.getIcon().setImageResource(item.getIcon());
 					
-				} else if (item.getTipo().equals("informacao_usuario")) {
-					holder.getIcon().setVisibility(View.VISIBLE);
-					holder.getIcon().setImageBitmap(item.getImagem());
-					
-				} else if (item.getTipo().equals("categoria")) {
+				} else if (item.getTipo().equals("informacao_usuario") || item.getTipo().equals("categoria")) {
 					holder.getIcon().setVisibility(View.VISIBLE);
 					holder.getIcon().setImageBitmap(item.getImagem());
 					

@@ -184,14 +184,14 @@ public class PromoActivity extends Activity implements ListView.OnItemClickListe
 		drawerAdapter.adicionarInformacaoUsuario(infoUser);
 		
 		drawerAdapter.adicionarMenu("Categorias");
-		for (int i = 0; i < categorias.size(); i++) {
-			
-			DrawerItem categoria = new DrawerItem(categorias.get(i).getNomeCategoria(), 0, "categoria");
-			
-			new DownloadImageCategoria(categoria, drawerAdapter).execute(categorias.get(i).getImagemLinkCategoria());
-			drawerAdapter.adicionarCategoria(categoria);
-		}
 		
+		for (Categoria categoria : categorias) {
+			DrawerItem categoriaDrawer = new DrawerItem(categoria.getNomeCategoria(), 0, "categoria");
+			new DownloadImageCategoria(categoriaDrawer, drawerAdapter).execute(categoria.getImagemLinkCategoria());
+			drawerAdapter.adicionarCategoria(categoriaDrawer);
+			
+		}
+
 		drawerAdapter.adicionarMenu("Pedidos");
 		//drawerAdapter.adicionarCategoria("Solicitados", R.drawable.ic_timer_orange);
 		//drawerAdapter.adicionarCategoria("Concluídos", R.drawable.ic_done_orange);
